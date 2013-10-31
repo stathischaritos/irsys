@@ -1,6 +1,13 @@
+#!/usr/bin/python
 from functions import *
+import sys
 
 
-
-index, indexed_docs = index_directory('/home/stathis/Projects/UVA_IR/collection/')
-print index['the']['CSIRO146-07022919']
+if len(sys.argv) < 3 or len(sys.argv) > 4 :
+      print " Usage :  ./main.py -[index/query]  [ (document/directory) / query_string ]"
+else:
+      if sys.argv[1] == "-index":
+            index,indexed_docs = index(sys.argv[2])
+      elif sys.argv[1] == "-query":
+            result = run_query(sys.argv[2])
+            print result

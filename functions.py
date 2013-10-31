@@ -26,17 +26,19 @@ def save_index(index , indexed_docs):
       output.close()
 
 
-def index_directory(collection_directory = "collection/"):
-      index , indexed_docs = load_index()
+def index_directory(collection_directory , index, indexed_docs):
       pbar = ProgressBar()
+
+      if collection_directory[len(collection_directory)-1] != '/':
+            collection_directory += '/'
 
       for root, dirs, files in os.walk(collection_directory):
           for file in pbar(files):
               if file.endswith(".txt"):
                   index_document(collection_directory + file, index, indexed_docs)
-      save_index(index,indexed_docs)
-      return index, indexed_docs
 
+
+      
 def index_document(file,index,indexed_docs):
       ## Open every file in the collection and read the text
       f = open(file,'r')
@@ -79,6 +81,29 @@ def index_document(file,index,indexed_docs):
             index[word[0]][doc_id] = word[1]
       ##################################################################
 
+
+
+def index(dir_or_file):
+      index, indexed_docs = load_index()
+
+      if os.path.isfile(dir_or_file):
+            print "Indexing Document '" + dir_or_file + "' ..."
+            index_document(dir_or_file,index,indexed_docs)
+      elif os.path.isdir(dir_or_file):
+            print "Indexing Directory '" + dir_or_file + "' ..."
+            index_directory(dir_or_file, index, indexed_docs)
+
+      save_index(index,indexed_docs)
+      print "Done!"
+      return index, indexed_docs
+
+
+def run_query(query_string):
+      print "Running Query..."
+      index, indexed_docs = load_index()
+      result = "Query Result"
+      print "Done!"
+      return result
 
 
 
