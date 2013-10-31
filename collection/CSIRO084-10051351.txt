@@ -1,0 +1,8 @@
+ Getting Started Documentation Glish Learn More Programming Contact Us Version 1.9 Build 1189 News FAQ Search Home Next: C++ standard and Compilers
+Up: System (Ger van Diepen) Previous: Current system Future developments Subsections C++ standard and Compilers
+Porting to Windows NT
+Code Management
+Documentation
+Release support
+Support of industry standards Next: C++ standard and Compilers Up: System (Ger van Diepen) Previous: Current system Contents Please send questions or comments about AIPS++ to aips2-request@nrao.edu.Copyright &#169; 1995-2000 Associated Universities Inc.,
+Washington, D.C. Return to AIPS++ Home Page 2005-11-10 

@@ -1,0 +1,8 @@
+ Getting Started Documentation Glish Learn More Programming Contact Us Version 1.9 Build 1189 News FAQ Search Home Next: Debugging Your Application
+Up: How to Write an AIPS++ Application Previous: Binding objects with non-standard constructors Testing Your Application Provide a test global function called yournametest() (e.g., imagetest) inside the .g file that contains your
+application code. Exercises all the functionality as thoroughly as
+possible. This should be similar to the demonstration function but
+much more complete. If the test runs correctly, return True, otherwise
+return False. Remember to test failure modes as well as things that
+are supposed to work! Next: Debugging Your Application Up: How to Write an AIPS++ Application Previous: Binding objects with non-standard constructors Contents Please send questions or comments about AIPS++ to aips2-request@nrao.edu.Copyright &#169; 1995-2000 Associated Universities Inc.,
+Washington, D.C. Return to AIPS++ Home Page 2005-11-10 

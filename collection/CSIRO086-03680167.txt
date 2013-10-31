@@ -1,0 +1,46 @@
+ Getting Started Documentation Glish Learn More Programming Contact Us Version 1.9 Build 1189 News FAQ Search Home Next: Specific Requirements
+Up: Data Previous: The General Nature of the Data for AIPS++ User-Oriented Data Organization From the point of view of the user the highest level identification of
+the problem is what we will call a ``project''. Projects are aimed at
+obtaining answers to scientific questions. Answers to these
+scientific questions frequently involve obtaining data from a variety
+of telescopes. Some projects require radio data from both single dish
+and array observations from the same or different instruments, each
+serving a different ``purpose''.
+Observations for each instrument are organized into observing ``runs''
+with sequences of ``scans'' with identical instrumental and observing
+parameters. Each scan contains
+``sub-scans'' with data elements in the form of spectra, time
+instances of coherence function data or spectra, etc., that are
+associated with instances of time. Astronomers need to deal with
+this hierarchy of data: project, purpose, instrument, observing run, scans, and
+sub-scans. It would be very helpful if the astronomer could be aided in dealing with things
+according to this hierarchy. Data that are viewed as simple sequences
+of data from stand-alone telescopes
+leave the astronomer to impose a mental image of
+project/instrument/purposes and then runs/scans on the simple data elements. The future mmA will
+be a case where the same instrument will generate both
+single dish and coherence function data sets. This makes it a prime
+example where the same instrument will serve diverse instrumental purposes
+for a wide variety of ``projects''. In this document we list preparation for observing as an AIPS++ task.
+This is partly because simulation, using
+AIPS++ processing tools, can be very useful in understanding an
+observing program during the planning and preparation process. In
+addition, it is at this stage that the user imposes the logic of
+project/instrument/purposes/runs/scans on the observing process, and this logic
+must be remembered and used as part of the data reduction and
+processing. If tools were available in AIPS++ to aid the user in
+passing on and using this logic all the way through data processing,
+it would be very helpful. It would be analogous to having and
+updating the map of a maze that can be used while passing through the
+maze. Data processing is very much like a maze to be negotiated for
+most astronomers, and assistance in dealing with the higher level
+purposes of data would be very useful. The above can be describe more technically by saying that data
+sets should have a hierarchy of descriptor (or ``header'') items, with
+descriptor items being identified by context information (such as
+name, position, etc., for images). These data descriptors should allow
+specification ranging very large, merged data sets to basic elements
+like pixels or u-v data points. It should be possible to eliminate
+redundancy by describing information on a sufficiently high level
+while allowing exceptions by overriding this information at a lower
+level; that is, mixtures of positive and negative data/information specifications. Next: Specific Requirements Up: Data Previous: The General Nature of the Data for AIPS++ Please send questions or comments about AIPS++ to aips2-request@nrao.edu.Copyright &#169; 1995-2000 Associated Universities Inc.,
+Washington, D.C. Return to AIPS++ Home Page 2005-11-10 

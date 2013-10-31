@@ -1,0 +1,231 @@
+ Getting Started Documentation Glish Learn More Programming Contact Us Version 1.9 Build 1189 News FAQ Search Home Next: Releases
+Up: AIPS++ report: Development cycle 1.4 Previous: Introduction Overview of work in this cycle In Single Dish support, Jim Braatz, Joe McMullin and Bob Garwood
+continue to focus on support of the GBT and development of the dish
+environment for general single dish analysis in aips++. There
+continue to be regular visits by Garwood and McMullin to Green Bank
+and Braatz to Charlottesville. Braatz has primary responsibility for
+GBT support while McMullin has primary responsibility for dish
+development. There was only minimal contact with the Arecibo group,
+primarily at the end of this development cycle. Most of the work this cycle was focussed on migrating all of the single
+dish software to work with version 2 of the MeasurementSet. This includes
+the gbt fillers, the sdfits conversion tools, the sditerator and
+sdaverager tools, dish, and the GBT commissioning tools. Significant
+changes where made in each of these areas in order to write to
+and read from version 2 of the MeasurementSet. At the same time, the contents of the sdrecord data container were modified to make better
+use of the AIPS++ measures. This change also impacted the commissioning
+tool and dish. The Green Bank tipper software was reevaluated and rewritten by Braatz.
+Braatz continued to support GBT mockup users. The mockup was dismantled
+at the end of this development cycle in preparation for GBT acceptance and
+commissioning during the next cycle. Several improvements were made to
+the commissioning tool. Dish work, in addition to the changes related to the new sdrecord and
+changes in the sditerator, was focussed on making dish a true aips++
+tool and improving the dish CLI. Dish is now recognized as a tool by
+the toolmanager. The CLI was completely rewritten to be more intuitive
+in the setup of parameters for each operation and to be easier to use
+with the scripting tool. This work was prompted, in part, by feedback
+from users at Arecibo. In Synthesis in keeping with the fundamental objectives of the
+development cycle, a strong overall emphasis was placed on
+higher-level synthesis applications, and in adding scientific features
+in areas where they most aided end-to-end reduction. The focus
+remained on connected-element reduction, although important VLBI
+development was scheduled in this development cycle in keeping with
+the planning priorities in this area. The high-level application
+development was complemented by a significant effort in user testing
+and public outreach. (See below) At the highest level in synthesis development this cycle, a focused
+effort was made to enhance the access users have to integrated
+synthesis applications, formed by combining low-level synthesis
+toolkit capabilities as more powerful, high-level tools. This process
+of vertical integration was pursued on several fronts, including large
+composite applications (map.g), tools for guided or assisted data
+reduction (imagerwizard.g, mosaicwizard.g), and in expanding the
+scientific functionality in the automated GUI system (toolmanager) and
+in other separate custom GUI's, such as visplot.g. At the
+intermediate, and lower levels in the synthesis system, signficant
+work was scheduled this development cycle, balanced against the
+higher-level integration effort. The primary infrastructure change
+concerned the full implementation and migration to the second revision
+of the MeasurementSet (MS) data format (Kemball and Wieringa). This
+data format was adopted earlier after discussion within the
+consortium, and provides improved support for combined single-dish and
+synthesis data, advanced synthesis development and VLBI support. It
+also makes several general changes proposed since the adoption of
+MSv1. All fillers have been migrated to MSv2 with the exception of the
+BIMA filler. A MSv1 to MSv2 converter was provided by Wieringa and
+Badia as an aid in the transition. In the area of general filler development, continuing improvements
+were made in several areas including the VLA (Marson) and ATCA
+(Wieringa and Badia). A prototype MERLIN filler exists (Maguire), and
+will be publicly available in v1.5. Other fillers were updated in the
+course of their migration to MSv2. The UVFITS filler was improved, and
+an initial FITS-IDI filler, required for VLBI, has been written
+(Maguire). Calibration work has been actively continued in this cycle. The
+primary focus has been on improving optimization for greater speed and
+efficiency, in testing convergence properties using simulated and real
+data, and in adding new capabilities and infrastructure. A thorough
+review of all convergence issues was conducted, and new simulated data
+tests have been added to calibratertester.g and the higher-level test
+tool, assay.g. The speed of the calibration solver has been improved
+significantly. A new pre-averaging mode is also available for all
+calibration solvers, targeted primarily at improving coupled or
+iterative instrumental polarization solutions. Work has continued in
+the area of ionosphere correction (Smirnov), and the integration of
+this code into the calibrater. It makes use of a global empirical
+ionosphere model known as PIM, which will later be supplemented with
+GPS and other local ionosphere data. The global data system
+implemented by Schiebel has proven very useful in supporting larger
+test datasets in all areas for synthesis. Imaging development has continued in this cycle (Holdaway and
+Cornwell). This has included work on optimal-sized FFT's for
+mosaicing, algorithm refinement in deconvolution in general, and in
+improved integration of deconvolution algorithms and imaging
+contexts. Several key mosaic observations have been imaged in AIPS++,
+to demonstrate the mosaicing capabilities. An example Glish script
+which performs end-to-end reduction of a sample VLA dataset has been
+checked into the AIPS++ system for general reference. We intend to add
+supplementary scripts of this type for other datasets, which either
+demonstrate end-to-end reduction or specialized imaging
+capabilities. Work has also continued on the AIPS++ simulator
+(Holdaway), with work aimed at supporting pointing and other more
+advanced errors. Image analysis capabilities were expanded by A new tool, Coordsys, was created to manipulate Coordinate Systems
+(including coordinate conversion) The Image tool display (via function 'view') has a new positions and profiling
+capability. Convolution by parameterized 2D functions was added to the Image tool (function 'convolve2d') and convolution interfaces
+were unified throughout the Image tool Mask handling with the Image tool was improved so that a uniform
+interface is presented regardless of the type of Image tool (real or
+virtual) A new keyword 'mask' was added to the majority of Image tool functions
+enabling on-the-fly masking. An automatic strong point source finder was added to the Image
+tool (function 'findsources') Other new functionality in the Image tool includes set/get
+of brightness units and the restoring beam, and the deconvolution of
+components from the restoring beam. Entry widgets in the Regionmanager were standardized and command-line
+interfaces improved for world regions In the Infrastructure area, work continued to support underlying
+applications development. A new storage manager StandardStMan has been developed.
+It is meant to be used instead of StManAipsIO. Its main advantage
+is that it does not keep all data in memory, so it uses far less
+memory. Furthermore it is more robust.
+It fully supports addition and removal of rows and columns.
+It is now the default storage manager for AIPS++ tables. The Lattices/Images framework has been improved considerably. The region handling is now the same in the various derived Image classes. It makes it much easier to deal with regions in higher level code. Classes have been added to implement on-the-fly masking. It makes it possible to define a mask based on the image data. The mask changes when the data change. Classes AxisSpecifier and AxisMapping have been created to be able to tell which degenerate axes can be removed. SubLattice and SubImage use them to reduce the dimensionality of an image or a subset of an image. The ability to temporarily close an image has been added. In this way concatenating many images can be done without hitting the open file limit. The logger has been improved.
+The main improvement is that once can do a selection and/or sort of
+the logged data. It uses the newly developed taqlwidget to let the
+user form a query string in a convenient way.
+Furthermore some other changes have been made to make the logger more
+powerful and customizable. The changelog proposal has been implemented.
+It consists of a few scripts (shell and glish) to maintain
+the changelog files. A perl script extracts information from
+the changelog files and transforms it into html. This allows users of AIPS++ to follow changes in the system from one build to the next. Where necessary AIPS++ code has been changed to make it compile with
+gcc-2.95. It means that AIPS++ now fully supports newer Linux systems
+like SUSE 6.4 which come with gcc-2.95.
+The main change was a workaround for a well known gcc-2.95 parser
+problem. It cannot always distinguish a constructor call from a
+function declaration; extra parentheses were needed in those cases.
+Furthermore gcc-2.95 is more strict with respect to const declarations
+(it gives errors instead of warnings). In Glish the ongoing work to memory leaks which arise from
+reference counting of values in Glish was finished and merged with
+AIPS++ development. Subsequent testing indicated that, while this work
+was successful, some work is still required both in terms of
+performance and memory leaks in specific cases. The changes which were
+integrated and tested, however, brought the amount and rate of leaks
+to a level which is manageable as part normal development. In addition, other minor bugs fixes and additions were made. Some of which
+are seen by end users of glish, e.g: when unary minus is applied to boolean vectors the result is now integer exponentiation now has higher precedence than unary minus colon is no longer a valid regular expression delimiter Many other defects which resulted in no visible change to the user
+were also fixed. In Parallelization, the principal effort is aimed at providing
+data reduction capabilities for the most demanding computational
+problems in radio astronomy. This infrastructure is being developed
+in a partnership with NCSA as part of the Alliance program, and forms
+part of the regular AIPS++ system. The current focus is both on expanding the existing parallelization
+and high-performance capabilities, as well as in demonstrating them
+for selected key science projects. Building on the second revision of
+the parallelization infrastructure, developed for v1.3, a key focus of
+the development in v1.4 has been the implementation of a fully
+parallelized wide-field imaging (3-D) application (Golap and
+Kemball). This involves parallelization of several operations per
+imaging facet, including PSF generation, visibility prediction, and
+image formation. Progress in this area has been good, and was
+described in a poster paper at ADASS X in November, 2000 (Golap et
+al). This capability is targeted at several key science datasets. This
+work has involved a significant investigation of multi-process I/O in
+AIPS++. Several issues in this area were identified as a result of
+careful analysis, and changes have been agreed in the Table system to
+support the I/O methods needed for applications of this nature. A
+deeper investigation of fully parallel I/O is also underway
+(Young). The remaining technology area which has received time during
+this development cycle is that of the NT port of libtrial and libaips,
+completed in the main by Paulo Cortes. This will be carried forward to
+allow a test parallel application to be run on an NT supercluster. To
+build on the existing NT work, a migration proposal has been drafted
+(Young) which proposes how these identified changes might be moved
+into the main AIPS++ code distribution. This process will be
+considered as we go forward. Doug Roberts left the AIPS++ parallelization effort in this
+development cycle. His responsibilities have been assigned to several
+individual developers, but new members (Cortes and Sarma) will help in
+this area in development cycle v1.5. Parallelization will retain its
+priorities and goals as we go forward, but an increased focus on Linux
+clusters is planned, to reflect strong trends in the supercomputing
+community. This includes initiative targeted at the new 64-bit IA64
+Intel processor, which is expected to be publicly available on that
+timescale. Improved progress in needed on the key science projects,
+and this will be a strong focus in v1.5. In the User Interface, we improved the GUI by expanding the use
+of larger data items in the user interface to describe scientifically
+meaningful data. Examples include uv-data selection, antenna
+selection, and deconvolution algorithms and parameters, amongst
+others. These data items simplify the user interface, and allow the
+development of specialized, tuned GUI's for user entry of data of this
+type. The automated GUI system, toolmanager, was revised to allow full
+support for these newer data items. It was also improved in many other
+areas to enhance scientific usability, and in response to user group
+feedback. The user interface work and vertical integration is not yet complete,
+and will continue as a strong focus in development cycle v1.5
+(November 2000 to April 2001). Although there are some known
+deficiencies in the user interface, we find a high level of variance
+in user feedback and advice in this area, given the somewhat
+subjective nature of user interfaces in general. Given the high cost
+of GUI development, we will actively solicit the widest possible user
+commentary regarding the synthesis user interface before making major
+revisions, but will continue to make improvements which increase
+scientific usability and about which there issignficant user
+agreement. It should be noted that the vertical integration does not compromise
+the toolkit architecture of AIPS++, which remains a fundamental driver
+for the package. It simply provides a high-level view for cases in
+which this is scientifically appropriate or useful. In Documentation, by choice, no changes were made to the
+mechanics of generating documents. Some chapters were added to
+``Getting Results in AIPS++'', and of course a lot of material
+was added to the User Reference Manual to accompany new features
+in the package. Mark Holdaway took over the editorship of the AIPS++ Newsletter
+and considerably improved the layout and content. In Management: We formed the new AIPS++ User Group. The first meeting of
+the group will be in Champaign-Urbana on Janaury 22 - 23, 2001. The
+members of the group are Tom Pauls (NRL/NPOI - chair), Robert Lucas
+(IRAM), Karen O'Neill (NAIC), Tony Willis (DRAO), Steve Myers (NRAO),
+Frazer Owen (NRAO), Dana Balser (NRAO), Lister Staveley-Smith (ATNF),
+Huib van Langevelde (JIVE), and Dave Mehringer (NCSA). This group is
+chosen to be composed of active and knowledgable users of AIPS++. The management and software engineering practices
+adopted by the project are now documented
+in the notes series. The Quality Assurance Group has been restructured by the
+closing out of the Rules Boss position. Our intention is that this
+group focus more on testing and review than on the activities of the
+Rules Boss. Monthly meetings between the site managers have continued,
+supplemented by face-to-face meetings where possible. Tim Cornwell assumed new responsibilities within NRAO, and his
+time available for AIPS++ has dropped to roughly 50%. Athol Kemball has therefore assumed responsibility for more
+of the day-to-day management of the project. Tim Cornwell remains
+Project Manager. In Outreach, an active scientific user group was formed in
+collaboration with the Scientific Services Division of the NRAO at the
+AOC, who were tasked with using AIPS++ for the reduction of several
+trial datasets. Regular meetings were held with this group, who were
+encouraged to submit defects in the AIPS++ bug tracking system when
+using the system. They also contributed suggestions in general areas
+of the package including the user interface and documentation system. This process increased local scientific expertise in AIPS++, helped to
+identify defects and improve the user interface to the package. This
+effort will be continued in subsequent development cycles, expanded to
+other NRAO and non-NRAO sites, and targeted at a broader audience. Presentations concerning AIPS++ were made at a number of meetings,
+including the AAS in Atlanta, the ADASS meeting in Boston, and the
+Synthesis Summer School in Socorro. Copies of AIPS++ on CD ROM were
+distributed at all of these meetings. We also gave demonstrations of
+the use of AIPS++. In the Quality Assurance Group, reviewing of a few classes
+was completed. Regular monitoring of the unit testing and glish assay tests by McMullin continues. The unit testing e-mail is now sent to
+the archived address aips2-testing. The overall testing was broadened to
+include all five canonical architectures (Solaris, Linux, SGI, HPUX,
+and Alpha). McMullin took over the responsibility for logging and
+shipping CDs. Brouw created a set of scripts to more easily move code
+around in the AIPS++ code tree. In Visualisation, UV-visualization and editing has been
+considerably expanded in visplot.g (Cornwell), and have expanded the
+thin-path capabilities in this area signficantly. At the same time,
+uv-visualization work in the Display Library (DL) continues, and
+included the development of prototype infrastructure in the area of
+uv-data display (Minter). Final design considerations in this area
+were concluded in direct discussions with Barnes, Marquarding,
+Kemball, King and Minter. Next: Releases Up: AIPS++ report: Development cycle 1.4 Previous: Introduction Contents Please send questions or comments about AIPS++ to aips2-request@nrao.edu.Copyright &#169; 1995-2000 Associated Universities Inc.,
+Washington, D.C. Return to AIPS++ Home Page 2005-11-10 

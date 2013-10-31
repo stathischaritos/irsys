@@ -1,0 +1,18 @@
+ Galaxies Detected by the Dwingeloo Obscured Galaxies Survey A. J. Rivers , P. A. Henning , R.C. Kraan-Korteweg ,, PASA, 16 (1), in press. Next Section: Acknowledgements
+Title/Abstract Page: Galaxies Detected by the
+Previous Section: Results
+Contents Page: Volume 16, Number 1 Conclusions and Future Directions A wide field flux limited survey for HI luminous galaxies hidden in the northern
+ZOA has been completed. With approximately 60% of the
+data analyzed we have detected 36 galaxies, 23 of which were previously
+unknown. Given the number found to date, in the full survey we expect to detect around 60 sources, which falls within
+our survey predictions of 50-100 galaxies. Since the DOGS slice covers a
+wide range of the extragalactic sky including portions of the Local Supercluster and the
+Local Void, the collected sample will be well suited for a comparison study of galaxies in different environments. Efforts are also underway to quantify the Galactic extinction, a poorly known quantity near the Galactic plane. Although the recently released
+DIRBE reddening maps (Schlegel et al. 1998) prove useful, they remain uncalibrated at low latitude
+(b 10). We are exploring the possibility of using
+near-infrared colors of galaxies from 2MASS data to independently determine
+the extinction and to thereby determine calibration constants and uncertainties
+for the DIRBE maps at low latitude. Next Section: Acknowledgements
+Title/Abstract Page: Galaxies Detected by the
+Previous Section: Results
+Contents Page: Volume 16, Number 1 &copy; Copyright Astronomical Society of Australia 1997 

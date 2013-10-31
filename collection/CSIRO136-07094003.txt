@@ -1,0 +1,26 @@
+
+CSIRO audio transcript
+Title: Playing the air guitar
+Duration: 5m:14s
+Location: http://www.csiro.au/csiro/content/file/pfn9.html.
+TranscriptNarrator:
+Your listening to CSIROpod, from the CSIRO, Australias leading scientific research organisation. Kylie Johnson:
+Hello and welcome to CSIROpod, I am Kylie Johnson. Plenty of teenage boys and more than a few adults act out their rock star fantasies by playing air guitar in the privacy of their own homes. But now the fantasy has come true, thanks to CSIRO scientist Richard Helmer. Dr. Helmer is from CSIROs Textiles and Fibre Technology Division and has designed the so called wearable instrument shirt or WIS. It allows users to play an electric guitar simply by moving one arm to pick chords, and the other to strum the imaginary instrument strings. I asked Dr. Helmer how the shirt actually works. Dr. Richard Helmer:
+Basically we have got a sensor on each elbow, so that monitors your arm motion. My instruments require you do to something with your arms in certain movements, so we can capture those movements and use those gestures to drive our instrument. So lets say you want to play guitar, you can have the right arm capturing the strumming motion and the left arm following you up and down the [inaudible] board, so that allows you to choose a part with your left arm, and play it with your right arm. So we may get a bit simpler than that, by say having a chord base. So your left arm chooses a chord, and your right arm plays that chord. So you can straight away have that feeling of playing a nice big fat distorted guitar chord. You can also play songs note by note, but you need to be a little bit more skilled to do that. Kylie Johnson:
+Did you find that hard to use? Dr. Richard Helmer:
+The biggest issue we have had is reducing our latenancy, and that is because weve done this as a sort of ad hoc project on the side. It is easy to place at chord level, but as you go to a sort of more highly skilled note by note level, you have to be aware of the latenancy, so the instrument plays like a normal instrument. But for the everyday user who just wants to play the verse in the chorus or actually play each individual chord, it is easy, it feels like a real instrument surprisingly so. Kylie Johnson:
+So you might have started an air guitar revolution by the sounds of things? Dr. Richard Helmer: Yeah, yeah. We have to formulate it into a product that we can distribute to people, which is what we are looking at doing. Yeah, we can do that. There are other people who have tried to make air guitars and they have done that with something like the Sony Hi-Toy and things like that. But what they … they cant do all the things we do. You cant play behind your head, turn around, walk away out of the field of the view of the camera. Using the textile sensors allows you to wander around the room, wander out of the room, do all those things that you want to do when you are jumping around playing air guitar. Kylie Johnson:
+So tell me, what other applications are there? Dr. Richard Helmer:
+Obviously we are doing something in the fund domain here, so in the entertainment space. But there is definite application in sports and monitoring postures. Even for at work, I know that I hate the draw down folder list. It is the easier way to lose your files, I would rather be able to reach to my left, and that is where I keep all my electronic textile stuff. Reach to the right that is where I keep all my admin stuff and you know, up down, distributed all around me, we can imagine, where we put our files and documents. So you can imagine a 3D work space. We can use it for rehabilitation. So lets say you have gone and injured your arm and you need to do these exercises, and your doctor is sitting at the end of a computer somewhere else and they could monitor what you are doing. Then we can go into the medical space, where you are looking at specific injuries and what has just happened. Or it could be used in the military, or in diving, where you have got certain gestures that have meaning, and you need to communicate them when you cant be seen. There is lots of different things that we can do. Kylie Johnson:
+And how long to it is commercially available? Dr. Richard Helmer:
+We have got a demonstrator at the moment, which is you know, pretty much for an air guitar, a wearable instrument, has most functionality. We need to improve the graphics user interface for that and insert it into a manufacturable product. If you are really serious, and people threw money in it, we might be able to turn it around for next Christmas, 2007. Kylie Johnson:
+I want one? Dr. Richard Helmer:
+Well I have got one. Kylie Johnson:
+Richard Helmer thanks so much for your time today, I really appreciate it. Dr. Richard Helmer:
+Okay great. Narrator:
+For more information about the CSIRO, visit our web-site at www.csiro.au Contact: Ms Heather Forward (MBIT) Communications Manager
+CSIRO Textile and Fibre Technology
+Phone: 61 3 5246 4085
+Fax: 61 3 5246 4811
+Email: Heather.Forward@csiro.au
+Web: www.csiro.au 

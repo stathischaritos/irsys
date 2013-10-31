@@ -1,0 +1,3 @@
+ Getting Started Documentation Glish Learn More Programming Contact Us Version 1.9 Build 1189 News FAQ Search Home Up: NOTE 223 - Lattice Expression Language Previous: Examples Future developments In the near or more distant future LEL will be enhanced by adding new
+features and by doing optimizations. Handle slices like image[1:10:2, 5:] which defines the section directly in pixel coordinates (with stride 2 for the first axis). Do optimization by reordering the expression. Do optimization by recognizing common subexpressions. Up: NOTE 223 - Lattice Expression Language Previous: Examples Please send questions or comments about AIPS++ to aips2-request@nrao.edu.Copyright &#169; 1995-2000 Associated Universities Inc.,
+Washington, D.C. Return to AIPS++ Home Page 2005-11-10 

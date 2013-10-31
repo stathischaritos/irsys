@@ -1,0 +1,36 @@
+ Go backward to A Free Software ProjectGo up to TopGo forward to Acknowledgements
+The Future
+R It is the present aim of the R project to produce a free
+implementation of something "close to" version 3 of the S language
+and to provide ongoing support and maintenance for the resulting
+software. Some members of the R core have proposed that future
+developments in S version 4 should be also tracked. At this point it
+is unclear whether this will happen.
+One development which would help R a good deal would be the
+development of an integrated graphical user interface. Some initial
+work has begun on this and I believe that it is something which will
+come quite quickly.
+My personal future interest in R is mainly as a user. Given the
+investment I have made in it, I hope that I will be able to get
+substantial use out of R for statistical work and teaching.
+Related Work
+Working on R has shown me that there a number of interesting questions
+related to building statistical software. My own conclusion has been
+that it is important to pursue efficiency issues, and in particular,
+speed.
+As noted in section*, Luke Tierney performed some
+experiments with R to see what kind of speed increase could be
+obtained using byte-code compilation; the indications were that a
+speedup by a factor of 20 might be possible for some computations.
+There is other evidence that a factor of 100 (roughly the speed of
+unoptimised C) might be possible with compilation to native machine
+code. With this level of performance, there would be no need for any
+foreign function interface and all computations could take
+place in a single language environment.
+I am intrigued by what such an environment might offer. An increase in
+performance of this magnitude is likely to produce a qualitative change
+in the use it gets puts to.
+The difficulty is that the creation of such a compiled environment
+requires the hand of an expert in compilation. There is a real
+problem in finding such an expert who is also aware of the type of
+problems which statisticians handle. 
