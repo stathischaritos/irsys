@@ -59,7 +59,7 @@ Indexing:
 ===============
 The index at this point has the following structure:
 
-index=>{
+"index"=>{
 
 	"indexed_docs"=>{
 						"doc1" => { "length" => 1000},
