@@ -78,3 +78,12 @@ In Boolean Retrieval when you have a query like " term1 term2 term3"
 you can do the intersection of the documents for every term, meaning that you return only the documents
 that contain all query terms. For the other models we coud implement a weighting factor for each document
 that depends on how many of the terms it contains , and figure out these weights by optimising on the developement set.
+
+
+Dependencies:
+===============
+NLTK 
+http://nltk.org/
+
+Simple text Progressbar
+sudo pip install progressbar
