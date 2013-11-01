@@ -2,10 +2,20 @@ IRSYS (IR SYSTEM)
 =================
 This is an end to end IR system written in Python , as part of a lab assignment in the Course of IR at UvA. 
 
->I separated the components of the system in different files (preprocessing - indexing  - query models) and i made a main executable script 
-called irsys.py which has the following usage:
+I separated the components of the system in different files (preprocessing - indexing  - query models) and i made a main executable script 
+called irsys which has the following usage:
 
-	./irsys -[index/query]  [ (document/directory) / 'query_string' ]
+	usage: irsys [-h] [-j {index,query,session}] [-p PATH] [-q QUERY]
+
+	optional arguments:
+	  -h, --help            show this help message and exit
+	  -j {index,query,session}, --job {index,query,session}
+	                        Specify the job you need to run.
+	  -p PATH, --path PATH  Path of file or directory to index
+	  -q QUERY, --query QUERY
+	                        Query string to run (for single query mode
+
+By default the program will start in "session" mode where you can run multiple queries. Otherwise you need to specify a job (index, query , session) and then you will get prompted for the required inputs , or you can also add them as arguments like -p for the indexing path or -q for the single query string. More arguments are to be added later ex. for what stemmers to use , providing a list of stopwords etc.
 
 >So it can now index either a specified file or directory ( re-indexing also works as an update not as simple addition ) , and you can
 run a simple AND query (taking the intersection of the documents for every term of the query).

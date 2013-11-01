@@ -1,4 +1,3 @@
-
 import pickle
 from indexing import *
 from query import *
@@ -37,9 +36,8 @@ def index(dir_or_file):
       return index
 
 
-def run_query(query_string):
+def run_query(query_string , index):
       print "Running Query..."
-      index = load_index()
       result = intersection(query_string , index)
       return result
 

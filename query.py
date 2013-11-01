@@ -7,6 +7,13 @@ def intersection(query_string,index):
 	a = []
 	b = []
 	i = 0
+	
+	query_clean = []
+	for word in query:
+	    if word in index['tokens']:
+	    	query_clean += [word]
+
+	query = query_clean
 
 	for word in query:
 	    if word in index['tokens']:
@@ -21,7 +28,5 @@ def intersection(query_string,index):
 		doc = []
 		for word in query:
 			doc +=[word , index['tokens'][word]['counts'][x] ]
-		print doc
- 
-	return 0
+	return a
 

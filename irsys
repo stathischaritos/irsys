@@ -1,19 +1,46 @@
 #!/usr/bin/python
 from helpers import *
-
-
 import sys
+import argparse
 
 
-if len(sys.argv) < 3 or len(sys.argv) > 4 :
-      print " Usage :  ./main.py -[index/query]  [ (document/directory) / 'query_string' ]"
+parser = argparse.ArgumentParser()
+parser.add_argument("-j", "--job", type = str , choices=['index', 'query', 'session'] , help="Specify the job you need to run.")
+parser.add_argument("-p", "--path", help="Path of file or directory to index")
+parser.add_argument("-q", "--query", help="Query string to run (for single query mode) ")
+
+
+args = parser.parse_args()
+
+
+if args.job == "index":
+
+      if not args.path:
+            args.path = raw_input("Please enter a file path or directory to index :") 
+
+      index = index(args.path)
+      print_statistics(index,'the')
+
+elif args.job == "query":
+      if not args.query:
+            args.query = raw_input("Please enter a Query to perform :") 
+
+      index = load_index()
+      result = run_query(args.query , index)
+      print result
 else:
-      if sys.argv[1] == "-index":
-            index = index(sys.argv[2])
-            print_statistics(index,'the')
-      elif sys.argv[1] == "-query":
-            result = run_query(sys.argv[2])
-            ##for x in result:
-            ##	print x
-      else:
-            print " Usage :  ./main.py -[index/query]  [ (document/directory) / 'query_string' ]"
+      index = load_index()
+      while True:
+            query = raw_input("Enter Query :") 
+
+            if query == "exit()":
+                  break
+
+            result = run_query(query , index)
+            print result
+            print "=================================================================="
+            print "=================================================================="
+
+
+
+      
