@@ -2,7 +2,7 @@ from progressbar import ProgressBar
 from preprocessing import *
 import os
 
-def index_directory(collection_directory , index, indexed_docs):
+def index_directory(collection_directory , index):
       pbar = ProgressBar()
 
       if collection_directory[len(collection_directory)-1] != '/':
@@ -11,11 +11,11 @@ def index_directory(collection_directory , index, indexed_docs):
       for root, dirs, files in os.walk(collection_directory):
           for file in pbar(files):
               if file.endswith(".txt"):
-                  index_document(collection_directory + file, index, indexed_docs)
+                  index_document(collection_directory + file, index)
 
 
       
-def index_document(file,index,indexed_docs):
+def index_document(file,index):
       ## Open every file in the collection and read the text
       f = open(file,'r')
       raw_text = f.read()
@@ -38,22 +38,30 @@ def index_document(file,index,indexed_docs):
 
       ## Save document id and length
       doc_id = file[0:(len(file)-4)]
-      if doc_id not in indexed_docs:
+
+
+      if doc_id not in index['indexed_docs']:
             indexed_before  = False
-            indexed_docs[doc_id] = {}
-            indexed_docs[doc_id]["length"] = len(tokenized_text)
+            index['indexed_docs'][doc_id] = {}
+            index['indexed_docs'][doc_id]["length"] = len(tokenized_text)
       else : 
             indexed_before = True
 
       ## Add counts to global index
       for word in document.iteritems():
-            if word[0] not in index:
-                  index[word[0]] = {}
-                  index[word[0]]['df'] = 1
-                  index[word[0]]['counts'] = {}
+            if word[0] not in index['tokens']:
+                  index['tokens'][word[0]] = {}
+                  index['tokens'][word[0]]['df'] = 1
+                  index['tokens'][word[0]]['counts'] = {}
+                  index['tokens'][word[0]]['total_counts'] = word[1]
             else:
                   if not indexed_before:
-                        index[word[0]]['df'] += 1
+                        index['tokens'][word[0]]['df'] += 1
+                        index['tokens'][word[0]]['total_counts'] += word[1]
+                  else:
+                        index['tokens'][word[0]]['total_counts'] -= index['tokens'][word[0]]['counts'][doc_id]
+                        index['tokens'][word[0]]['total_counts'] +=word[1]
 
-            index[word[0]]['counts'][doc_id] = word[1]
+
+            index['tokens'][word[0]]['counts'][doc_id] = word[1]
       ##################################################################
