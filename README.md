@@ -37,7 +37,7 @@ Preprocessing:
 Sentence and Word Tokeniser 
 
 Word Clustering - Stemming - Lemmatization
--------------------------------------------
+--------------------------------------------
 
 -	Porter Stemmer
 -	Lancaster Stemmer 
@@ -155,4 +155,4 @@ Simple text Progressbar
 
 Django
 -------
-sudo pip install django
+	sudo pip install django
