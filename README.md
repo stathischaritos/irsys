@@ -100,6 +100,20 @@ that contain all query terms. For the other models we coud implement a weighting
 that depends on how many of the terms it contains , and figure out these weights by optimising on the developement set.
 
 
+Evaluation:
+=================
+For evaluation is is suggested in the assignment to use :
+	http://thetrecfiles.nonrelevant.net/
+
+But for easier local evaluation i downloaded "terrier" from http://terrier.org/ that has an evaluation module for trec files:
+
+To do evaluation with Terrier we need to have the trec.qrels inside the trec folder (this is a setting at "terrier/etc/terrier.parameters")
+and specify the file or folder of results (.res files ) you want to evaluate:
+
+	./trec_terrier.sh -e /home/stathis/Projects/UVA_IR/results/*
+
+I think this way its going to be easier to evaluate automatically each query right after running it.
+
 Dependencies:
 ===============
 NLTK 
