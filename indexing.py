@@ -50,9 +50,10 @@ def index_document(file,index,indexed_docs):
             if word[0] not in index:
                   index[word[0]] = {}
                   index[word[0]]['df'] = 1
+                  index[word[0]]['counts'] = {}
             else:
                   if not indexed_before:
                         index[word[0]]['df'] += 1
 
-            index[word[0]][doc_id] = word[1]
+            index[word[0]]['counts'][doc_id] = word[1]
       ##################################################################

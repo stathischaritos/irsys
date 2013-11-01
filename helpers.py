@@ -1,6 +1,7 @@
 
 import pickle
 from indexing import *
+from query import *
 
 def load_index(dir = "index.pkl"):
       if os.path.exists(dir):
@@ -39,7 +40,7 @@ def index(dir_or_file):
 def run_query(query_string):
       print "Running Query..."
       index, indexed_docs = load_index()
-      result = "Query Result"
-      print "Done!"
+      result = intersection(query_string , index)
       return result
+
 

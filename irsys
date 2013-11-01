@@ -6,7 +6,7 @@ import sys
 
 
 if len(sys.argv) < 3 or len(sys.argv) > 4 :
-      print " Usage :  ./main.py -[index/query]  [ (document/directory) / query_string ]"
+      print " Usage :  ./main.py -[index/query]  [ (document/directory) / 'query_string' ]"
 else:
       if sys.argv[1] == "-index":
             index,indexed_docs = index(sys.argv[2])
@@ -14,4 +14,4 @@ else:
             result = run_query(sys.argv[2])
             print result
       else:
-            print " Usage :  ./main.py -[index/query]  [ (document/directory) / query_string ]"
+            print " Usage :  ./main.py -[index/query]  [ (document/directory) / 'query_string' ]"
