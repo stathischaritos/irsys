@@ -8,6 +8,7 @@ Preprocessing:
 Sentence and Word Tokeniser 
 
 Word Clustering - Stemming - Lemmatization
+-------------------------------------------
 
 	Porter Stemmer
 	
@@ -17,11 +18,14 @@ Word Clustering - Stemming - Lemmatization
 	
 	WordNet
 	
-Stop words ( remove or index separately? )
+Stop words
+--------------
+ ( remove or index separately? )
 I was thinking we could index stop words in a separate file and then run some experiments on subgroups of them . For example we 
 could try taking only the N most frequent stopwords.
 
 Granularity:
+-------------
 Right now we index every document as a whole , and this is fine for small documents , buts for langer documents like books , it is best to treat chapters or pages separately.
 
 
@@ -68,11 +72,11 @@ There seem to be some invalid characters , i think it has to do with the encodin
 IR: 
 ==============
 
-We can implement the following systems:
-Boolean
-tf-idf
-BM25
-cosine-distance
+We can implement the following ranking functions:
+-Boolean
+-tf-idf
+-BM25
+-cosine-distance
 
 In Boolean Retrieval when you have a query like " term1 term2 term3"
 you can do the intersection of the documents for every term, meaning that you return only the documents
@@ -83,7 +87,11 @@ that depends on how many of the terms it contains , and figure out these weights
 Dependencies:
 ===============
 NLTK 
-http://nltk.org/
+-----
+
+	http://nltk.org/
 
 Simple text Progressbar
-sudo pip install progressbar
+------------------------
+
+	sudo pip install progressbar
