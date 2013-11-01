@@ -59,37 +59,37 @@ Indexing:
 ===============
 The index at this point has the following structure:
 
-"index"=>{
-
-	"indexed_docs"=>{
-						"doc1" => { "length" => 1000},
-						"doc2" => { "length" => 500},
+	index => {
+	
+		"indexed_docs"=>{
+							"doc1" => { "length" => 1000},
+							"doc2" => { "length" => 500},
+							....
+						},
+	
+		"tokens" =>{
+						"the" =>{ 
+									"counts" => {
+													"doc1" => 5,
+													"doc2" => 10,
+													....
+												},
+									"df"    =>  10,
+									"total_counts" => 100
+								},
+					
+						"of"  =>{ 
+									"counts" => {
+													"doc1" => 20,
+													"doc2" => 30,
+													....
+												},
+									"df"    =>  25,
+									"total_counts" => 200
+								},
 						....
-					},
-
-	"tokens" =>{
-					"the" =>{ 
-								"counts" => {
-												"doc1" => 5,
-												"doc2" => 10,
-												....
-											},
-								"df"    =>  10,
-								"total_counts" => 100
-							},
-				
-					"of"  =>{ 
-								"counts" => {
-												"doc1" => 20,
-												"doc2" => 30,
-												....
-											},
-								"df"    =>  25,
-								"total_counts" => 200
-							},
-					....
-				}
-}
+					}
+	}
 
 
 
