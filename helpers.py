@@ -22,27 +22,6 @@ def save_index(index):
       output.close()
 
 
-def index(dir_or_file):
-      index = load_index()
-
-      if os.path.isfile(dir_or_file):
-            print "Indexing Document '" + dir_or_file + "' ..."
-            index_document(dir_or_file,index)
-      elif os.path.isdir(dir_or_file):
-            print "Indexing Directory '" + dir_or_file + "' ..."
-            index_directory(dir_or_file, index)
-
-      save_index(index)
-      print "Done!"
-      return index
-
-
-def run_query(query_string , index):
-      print "Running Query..."
-      result = intersection(query_string , index)
-      return result
-
-
 def print_statistics(index , token = 'of'):
       total_tokens = 0
       for x in index['indexed_docs']:
@@ -57,27 +36,31 @@ def print_statistics(index , token = 'of'):
       print "Total Count of Token  '" + token + "' : " , token_counts
 
 
-def evaluate(query,qid):
+def evaluate(query,qid,model='intersection'):
       index = load_index()
-      result = run_query(query , index)
+      result = run_query(query , index , model)
+
       rank = 1
       score = 1.0
       runID = 1
 
       ## Write res file of the query
-      f = open('results/'+ str(qid) +".res",'wb')
+      f = open('/home/stathis/Projects/UVA_IR/results/'+ str(qid) +".res",'wb')
       string = ""
+      i = 0
       for doc in result:
-            string += str(qid) + " Q0 " + doc +" "+ str(rank) + " " + str(score) + " " + str(runID) + "\n"
+            i += 1
+            string += str(qid) + " Q0 " + doc[0] +" "+ str(i) + " " + str(doc[1]) + " " + str(runID) + "\n"
       f.write(string)
       f.close() 
 
       ##evaluation using terrier
-      call(["./terrier/bin/trec_terrier.sh", "-e results/"+ str(qid) +".res"])
+      call(["/home/stathis/Projects/UVA_IR/terrier/bin/trec_terrier.sh", "-e /home/stathis/Projects/UVA_IR/results/"+ str(qid) +".res"])
 
-      f = open("results/"+ str(qid) +".eval",'r')
+      f = open("/home/stathis/Projects/UVA_IR/results/"+ str(qid) +".eval",'r')
       evaluation= f.read()
       f.close()
-      print evaluation
+      return evaluation
+      
 
 

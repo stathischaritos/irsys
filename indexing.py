@@ -2,6 +2,20 @@ from progressbar import ProgressBar
 from preprocessing import *
 import os
 
+def index(dir_or_file):
+      index = load_index()
+
+      if os.path.isfile(dir_or_file):
+            print "Indexing Document '" + dir_or_file + "' ..."
+            index_document(dir_or_file,index)
+      elif os.path.isdir(dir_or_file):
+            print "Indexing Directory '" + dir_or_file + "' ..."
+            index_directory(dir_or_file, index)
+
+      save_index(index)
+      print "Done!"
+      return index
+      
 def index_directory(collection_directory , index):
       pbar = ProgressBar()
 

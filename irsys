@@ -21,7 +21,7 @@ predefined_queries = {
 if args.qid:
       query = predefined_queries[str(args.qid)];
       print "Evaluating Query : " + query
-      evaluate(query,args.qid)
+      print evaluate(query,args.qid)
       
 elif args.job == "index":
 
@@ -36,8 +36,8 @@ elif args.job == "query":
             args.query = raw_input("Please enter a Query to perform :") 
 
       index = load_index()
-      result = run_query(args.query , index)
-      print result
+      print run_query(args.query , index)
+      
 else:
       index = load_index()
       while True:
@@ -47,7 +47,8 @@ else:
                   break
 
             result = run_query(query , index)
-            print result
+            for x in result[0:min(10,len(result))]:
+                  print x
             print "=================================================================="
             print "=================================================================="
 

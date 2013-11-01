@@ -1,6 +1,13 @@
 
 from indexing import *
 
+def run_query(query_string , index , model='intersection'):
+		print "Running Query..."
+		result =[]
+		if model =='intersection':
+			result = intersection(query_string , index)
+		return result
+      
 def intersection(query_string,index):
 	
 	query = preprocess(query_string)
@@ -24,9 +31,18 @@ def intersection(query_string,index):
 	    		b = index['tokens'][word]['counts'].keys()
 	    		a = list(set(a) & set(b))
 
-	for x in a:   		
-		doc = []
-		for word in query:
-			doc +=[word , index['tokens'][word]['counts'][x] ]
-	return a
+	# for x in a:   		
+	# 	doc = []
+	# 	for word in query:
+	# 		doc +=[word , index['tokens'][word]['counts'][x] ]
+	result = []
+	for doc in index['indexed_docs']:
+		if doc in a:
+			result += [[doc , 1]]
+		else:
+			result += [[doc , 0]]
+
+	## Sort Results by score
+	result = sorted(result, key=lambda tup: tup[1])[::-1]
+	return result
 

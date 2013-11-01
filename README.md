@@ -132,6 +132,14 @@ Ok i did write a script to generate a new qrels file but im getting the same pre
 
 I made a simple evaluation function in helpers.py
 
+Django demo:
+=============
+I made a simple django page to demonstrate the system using only python code.
+to start the django server go inside the irsysweb directory and run:
+
+	python manage.py runserver
+
+
 Dependencies:
 ===============
 NLTK 
@@ -143,3 +151,8 @@ Simple text Progressbar
 ------------------------
 
 	sudo pip install progressbar
+
+
+Django
+-------
+sudo pip install django
