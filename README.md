@@ -114,6 +114,10 @@ and specify the file or folder of results (.res files ) you want to evaluate:
 
 I think this way its going to be easier to evaluate automatically each query right after running it.
 
+
+One issue we have is that the some of the "relevant" files in the qrels file do not exist in our collections as it is a subset of the whole
+collection. This way we will always get worse precision due to our incomplete document set. To solve this we could remove these document ids from the qrels file.
+
 Dependencies:
 ===============
 NLTK 
