@@ -73,10 +73,11 @@ IR:
 ==============
 
 We can implement the following ranking functions:
--Boolean
--tf-idf
--BM25
--cosine-distance
+
+-	Boolean
+-	tf-idf
+-	BM25
+-	cosine-distance
 
 In Boolean Retrieval when you have a query like " term1 term2 term3"
 you can do the intersection of the documents for every term, meaning that you return only the documents
