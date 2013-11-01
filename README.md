@@ -18,29 +18,62 @@ Word Clustering - Stemming - Lemmatization
 	WordNet
 	
 Stop words ( remove or index separately? )
+I was thinking we could index stop words in a separate file and then run some experiments on subgroups of them . For example we 
+could try taking only the N most frequent stopwords.
 
-Granularity
+Granularity:
+Right now we index every document as a whole , and this is fine for small documents , buts for langer documents like books , it is best to treat chapters or pages separately.
 
 
 Indexing:
 ===============
-I think the index needs to be a dictionary of the form:
-[term][df] => [ [doc_id , tf] , [doc_id , tf] , [doc_id , tf] , [doc_id , tf] , [doc_id , tf] ]
+The index at this point has the following structure:
+index={
 
-ok i made a dictionary for the index that we can use like:
+	"indexed_docs"=>{
+						"doc1" => { "length" => 1000},
+						"doc2" => { "length" => 500},
+						....
+					},
 
-index["term"]["df"] to get the document frequency
+	"tokens" =>{
+					"the" =>{ 
+								"counts" => {
+												"doc1" => 5,
+												"doc2" => 10,
+												....
+											},
+								"df"    =>  10,
+								"total_counts" => 100
+							},
+				
+					"of"  =>{ 
+								"counts" => {
+												"doc1" => 20,
+												"doc2" => 30,
+												....
+											},
+								"df"    =>  25,
+								"total_counts" => 200
+							},
+					....
+				}
+}
 
-index["term"]["doc_id"] to get the term frequency for each document
 
 
 There seem to be some invalid characters , i think it has to do with the encoding , fix it later.
 
-IR:
+IR: 
 ==============
+
 We can implement the following systems:
 Boolean
 tf-idf
 BM25
 cosine-distance
 
+In Boolean Retrieval when you have a query like " term1 term2 term3"
+you can do the intersection of the documents for every term, meaning that you return only the documents
+that contain all query terms. For the other models we coud implement a weighting factor for each document
+that depends on how many of the terms it contains , and figure out these weights by optimising on the developement set.
