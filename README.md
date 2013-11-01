@@ -1,3 +1,6 @@
+IRSYS (IR SYSTEM)
+=================
+This is an end to end IR system written in Python , as part of a lab assignment in the Course of IR at UvA. 
 Preprocessing:
 ===============
 
