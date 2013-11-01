@@ -28,7 +28,8 @@ Right now we index every document as a whole , and this is fine for small docume
 Indexing:
 ===============
 The index at this point has the following structure:
-index={
+
+index=>{
 
 	"indexed_docs"=>{
 						"doc1" => { "length" => 1000},
