@@ -27,6 +27,7 @@ So it can now index either a specified file or directory ( re-indexing also work
 run a simple AND query (taking the intersection of the documents for every term of the query).
 
 To run and evaluate one of the peredefined queries you can do:
+
 	./irsys -qid 6
 
 
