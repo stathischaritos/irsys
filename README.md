@@ -128,6 +128,8 @@ I think this way its going to be easier to evaluate automatically each query rig
 One issue we have is that the some of the "relevant" files in the qrels file do not exist in our collections as it is a subset of the whole
 collection. This way we will always get worse precision due to our incomplete document set. To solve this we could remove these document ids from the qrels file.
 
+Ok i did write a script to generate a new qrels file but im getting the same precision results for the intersection query...
+
 I made a simple evaluation function in helpers.py
 
 Dependencies:
