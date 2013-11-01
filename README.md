@@ -2,6 +2,15 @@ IRSYS (IR SYSTEM)
 =================
 This is an end to end IR system written in Python , as part of a lab assignment in the Course of IR at UvA. 
 
+>I separated the components of the system in different files (preprocessing - indexing  - query models) and i made a main executable script 
+called irsys.py which has the following usage:
+
+	./main.py -[index/query]  [ (document/directory) / 'query_string' ]
+
+>So it can now index either a specified file or directory ( re-indexing also works as an update not as simple addition ) , and you can
+run a simple AND query (taking the intersection of the documents for every term of the query).
+
+
 Preprocessing:
 ===============
 
@@ -68,7 +77,6 @@ There seem to be some invalid characters , i think it has to do with the encodin
 
 IR: 
 ==============
-
 We can implement the following ranking functions:
 
 -	Boolean
