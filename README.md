@@ -5,7 +5,8 @@ This is an end to end IR system written in Python , as part of a lab assignment 
 I separated the components of the system in different files (preprocessing - indexing  - query models) and i made a main executable script 
 called irsys which has the following usage:
 
-	usage: irsys [-h] [-j {index,query,session}] [-p PATH] [-q QUERY]
+	usage: irsys [-h] [-j {index,query,session}] [-p PATH] [-q QUERY] [-e]
+             [-qid {6,7}]
 
 	optional arguments:
 	  -h, --help            show this help message and exit
@@ -13,12 +14,20 @@ called irsys which has the following usage:
 	                        Specify the job you need to run.
 	  -p PATH, --path PATH  Path of file or directory to index
 	  -q QUERY, --query QUERY
-	                        Query string to run (for single query mode
+	                        Query string to run (for single query mode)
+	  -e, --eval            Make res file and evaluate using terrier
+	  -qid {6,7}, --qid {6,7}
+	                        Pick one of the predefined queries to evaluate using
+	                        terrier
+
 
 By default the program will start in "session" mode where you can run multiple queries. Otherwise you need to specify a job (index, query , session) and then you will get prompted for the required inputs , or you can also add them as arguments like -p for the indexing path or -q for the single query string. More arguments are to be added later ex. for what stemmers to use , providing a list of stopwords etc.
 
->So it can now index either a specified file or directory ( re-indexing also works as an update not as simple addition ) , and you can
+So it can now index either a specified file or directory ( re-indexing also works as an update not as simple addition ) , and you can
 run a simple AND query (taking the intersection of the documents for every term of the query).
+
+To run and evaluate one of the peredefined queries you can do:
+	./irsys -qid 6
 
 
 Preprocessing:
@@ -117,6 +126,8 @@ I think this way its going to be easier to evaluate automatically each query rig
 
 One issue we have is that the some of the "relevant" files in the qrels file do not exist in our collections as it is a subset of the whole
 collection. This way we will always get worse precision due to our incomplete document set. To solve this we could remove these document ids from the qrels file.
+
+I made a simple evaluation function in helpers.py
 
 Dependencies:
 ===============

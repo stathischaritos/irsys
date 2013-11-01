@@ -3,17 +3,27 @@ from helpers import *
 import sys
 import argparse
 
-
+##Argument Parser Options
 parser = argparse.ArgumentParser()
 parser.add_argument("-j", "--job", type = str , choices=['index', 'query', 'session'] , help="Specify the job you need to run.")
 parser.add_argument("-p", "--path", help="Path of file or directory to index")
 parser.add_argument("-q", "--query", help="Query string to run (for single query mode) ")
-
-
+parser.add_argument("-e", "--eval",action='store_true', help="Make res file and evaluate using terrier")
+parser.add_argument("-qid", "--qid" ,type = int,choices=[6, 7], help="Pick one of the predefined queries to evaluate using terrier")
 args = parser.parse_args()
 
+##Predefined Queries
+predefined_queries = {
+                        '6' : "sustainable ecosystems",
+                        '7' : 'air guitar textile sensors'
+                     }
 
-if args.job == "index":
+if args.qid:
+      query = predefined_queries[str(args.qid)];
+      print "Evaluating Query : " + query
+      evaluate(query,args.qid)
+      
+elif args.job == "index":
 
       if not args.path:
             args.path = raw_input("Please enter a file path or directory to index :") 

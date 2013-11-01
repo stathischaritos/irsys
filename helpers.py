@@ -1,6 +1,7 @@
 import pickle
 from indexing import *
 from query import *
+from subprocess import call
 
 def load_index(dir = "index.pkl"):
       if os.path.exists(dir):
@@ -54,5 +55,29 @@ def print_statistics(index , token = 'of'):
       print "Total Number of Tokens : "  , total_tokens
       print "Number of Unique Tokens : "  ,  unique_tokens
       print "Total Count of Token  '" + token + "' : " , token_counts
+
+
+def evaluate(query,qid):
+      index = load_index()
+      result = run_query(query , index)
+      rank = 1
+      score = 1.0
+      runID = 1
+
+      ## Write res file of the query
+      f = open('results/'+ str(qid) +".res",'wb')
+      string = ""
+      for doc in result:
+            string += str(qid) + " Q0 " + doc +" "+ str(rank) + " " + str(score) + " " + str(runID) + "\n"
+      f.write(string)
+      f.close() 
+
+      ##evaluation using terrier
+      call(["./terrier/bin/trec_terrier.sh", "-e results/"+ str(qid) +".res"])
+
+      f = open("results/"+ str(qid) +".eval",'r')
+      evaluation= f.read()
+      f.close()
+      print evaluation
 
 

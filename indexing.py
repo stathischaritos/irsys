@@ -19,6 +19,7 @@ def index_document(file,index):
       ## Open every file in the collection and read the text
       f = open(file,'r')
       raw_text = f.read()
+      f.close()
       file = file.split('/')
       file = file[len(file)-1]
       ############## Preprocessing Steps here ##########################
