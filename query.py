@@ -1,13 +1,17 @@
-
 from indexing import *
 
+
+
 def run_query(query_string , index , model='intersection'):
-		print "Running Query..."
-		result =[]
-		if model =='intersection':
-			result = intersection(query_string , index)
-		return result
+            print "Running Query..."
+            result =[]
+            if model =='intersection':
+                  result = intersection(query_string , index)
+            return result
       
+
+
+
 def intersection(query_string,index):
 	
 	query = preprocess(query_string)

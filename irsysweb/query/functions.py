@@ -1,9 +1,179 @@
 import pickle
-from indexing import *
-from query import *
 from subprocess import call
 from pylab import *
+from progressbar import ProgressBar
+import os
+import nltk
 
+
+def index_directory(collection_directory , index ,  stemmer = 'porter' , lemmatization ="wordnet" , remove_stopwords = False):
+      pbar = ProgressBar()
+
+      if collection_directory[len(collection_directory)-1] != '/':
+            collection_directory += '/'
+
+      for root, dirs, files in os.walk(collection_directory):
+          for file in pbar(files):
+              if file.endswith(".txt"):
+                  index_document(collection_directory + file, index , stemmer , lemmatization ,remove_stopwords)
+
+
+      
+def index_document(file,index , stemmer = 'porter' , lemmatization ="wordnet" , remove_stopwords = False):
+      ## Open every file in the collection and read the text
+
+      f = open(file,'r')
+      raw_text = f.read()
+      f.close()
+      file = file.split('/')
+      file = file[len(file)-1]
+      ############## Preprocessing Steps here ##########################
+      ## Result should be a list of tokens
+      tokenized_text = preprocess(raw_text , stemmer , lemmatization , remove_stopwords)
+      ##################################################################
+
+      ############## Indexing Steps here ###############################
+      ## Result should be a posting list
+      ## Do inner document counts - can run this in parallel.
+      document = {}
+      for term in tokenized_text:
+            if term in document:
+                  document[term] += 1
+            else:
+                  document[term] = 1
+
+      ## Save document id and length
+      doc_id = file[0:(len(file)-4)]
+
+
+      if doc_id not in index['indexed_docs']:
+            indexed_before  = False
+            index['indexed_docs'][doc_id] = {}
+            index['indexed_docs'][doc_id]["length"] = len(tokenized_text)
+      else : 
+            indexed_before = True
+
+      ## Add counts to global index
+      for word in document.iteritems():
+            if word[0] not in index['tokens']:
+                  index['tokens'][word[0]] = {}
+                  index['tokens'][word[0]]['df'] = 1
+                  index['tokens'][word[0]]['counts'] = {}
+                  index['tokens'][word[0]]['total_counts'] = word[1]
+            else:
+                  if not indexed_before:
+                        index['tokens'][word[0]]['df'] += 1
+                        index['tokens'][word[0]]['total_counts'] += word[1]
+                  else:
+                        index['tokens'][word[0]]['total_counts'] -= index['tokens'][word[0]]['counts'][doc_id]
+                        index['tokens'][word[0]]['total_counts'] +=word[1]
+
+
+            index['tokens'][word[0]]['counts'][doc_id] = word[1]
+      ##################################################################
+def preprocess(text, stemmer = "porter" , lemmatization = "wordnet" , remove_stopwords = False):
+    tokenised_text = nltk.word_tokenize(text)
+      
+      ##Lematisation
+    if lemmatization == 'wordnet':
+      tokenised_text = wordnet(tokenised_text)
+
+    ## Stemming
+    if stemmer == 'porter':
+      tokenised_text = porter(tokenised_text)
+    elif stemmer == 'lancaster' :
+      tokenised_text = lancaster(tokenised_text)
+
+    ##remove stopwords
+    if remove_stopwords:
+      tokenised_text = nltk_remove_stopwords(tokenised_text)
+
+
+    return tokenised_text
+
+
+def lancaster(tokenised_text):
+      from nltk.stem.lancaster import LancasterStemmer
+
+      st = LancasterStemmer()
+      stemmed_tokens = []
+      for token in tokenised_text:
+            stemmed_tokens += [st.stem(token)]
+
+      return stemmed_tokens
+
+def porter(tokenised_text):
+      from nltk.stem.porter import PorterStemmer
+
+      st = PorterStemmer()
+      stemmed_tokens = []
+      for token in tokenised_text:
+            stemmed_tokens += [st.stem(token)]
+
+      return stemmed_tokens
+
+def wordnet(tokenised_text):
+      from nltk.stem.wordnet import WordNetLemmatizer
+      lmtzr = WordNetLemmatizer()
+      lemmas = []
+
+      for token in tokenised_text:
+            lemmas += [lmtzr.lemmatize(token)]
+
+      return lemmas
+
+
+def nltk_remove_stopwords(tokenised_text):
+      stopwords = nltk.corpus.stopwords.words('english')
+      return [w for w in tokenised_text if w.lower() not in stopwords]
+
+def run_query(query_string , index , model='intersection'):
+            print "Running Query..."
+            result =[]
+            if model =='intersection':
+                  result = intersection(query_string , index)
+            return result
+      
+
+
+
+def intersection(query_string,index):
+      
+      query = preprocess(query_string)
+      a = []
+      b = []
+      i = 0
+      
+      query_clean = []
+      for word in query:
+          if word in index['tokens']:
+            query_clean += [word]
+
+      query = query_clean
+
+      for word in query:
+          if word in index['tokens']:
+            if i == 0:
+                  a = index['tokens'][word]['counts'].keys()
+                  i = 1
+            else:
+                  b = index['tokens'][word]['counts'].keys()
+                  a = list(set(a) & set(b))
+
+      # for x in a:           
+      #     doc = []
+      #     for word in query:
+      #           doc +=[word , index['tokens'][word]['counts'][x] ]
+      result = []
+      for doc in index['indexed_docs']:
+            if doc in a:
+                  result += [[doc , 1]]
+            else:
+                  result += [[doc , 0]]
+
+      ## Sort Results by score
+      result = sorted(result, key=lambda tup: tup[1])[::-1]
+      return result
 
 
 def load_index(dir = "/home/stathis/Projects/UVA_IR/index.pkl"):
