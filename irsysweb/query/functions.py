@@ -314,10 +314,10 @@ def chart_results(qid):
       fig = figure()
       ax1 = fig.add_subplot(1,2,1)
       ax1.plot(precx,precy ,color="blue", linewidth=2.5, linestyle="-" ,label="Precision at")
-      ax1.legend(loc='upper right')
+      ##ax1.legend(loc='best')
       ax2 = fig.add_subplot(1,2,2)
       ax2.plot(pprecx,pprecy ,color="blue", linewidth=2.5, linestyle="-" ,label="Precision at %")
-      ax2.legend(loc='upper right')
+      ##ax2.legend(loc='best')
       fig.savefig("/home/stathis/Projects/UVA_IR/results/"+str(qid)+'.png' ,transparent=True)
       fig.savefig("/home/stathis/Projects/UVA_IR/irsysweb/query/static/"+str(qid)+'.png' ,transparent=True)
       results["path"] ="/static/"+str(qid)+'.png'
