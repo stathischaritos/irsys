@@ -10,6 +10,9 @@ parser.add_argument("-p", "--path", help="Path of file or directory to index")
 parser.add_argument("-q", "--query", help="Query string to run (for single query mode) ")
 parser.add_argument("-e", "--eval",action='store_true', help="Make res file and evaluate using terrier")
 parser.add_argument("-qid", "--qid" ,type = int,choices=[6, 7], help="Pick one of the predefined queries to evaluate using terrier")
+parser.add_argument("-s", "--stem" ,type = str,choices=['porter', 'lancaster'], help="Pick one of the available stemmers for indexing")
+parser.add_argument("-l", "--lem" ,type = int,choices=['wordnet'], help="Pick wither to use wordnet for lemmatization (maybe add other options in the future)")
+parser.add_argument("-rs", "--rs" ,action='store_true', help="Remove Stopwords , default is False")
 args = parser.parse_args()
 
 ##Predefined Queries
@@ -28,7 +31,14 @@ elif args.job == "index":
       if not args.path:
             args.path = raw_input("Please enter a file path or directory to index :") 
 
-      index = index(args.path)
+      stemmer = "porter"
+      lem = "wordnet"
+
+      if args.stem :
+            stemmer = args.stem
+      if args.lem :
+            lem = args.lem
+      index = index(args.path,stemmer,lem ,args.rs)
       print_statistics(index,'the')
 
 elif args.job == "query":

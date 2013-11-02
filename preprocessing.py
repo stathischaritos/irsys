@@ -1,10 +1,9 @@
 import nltk
 
-def preprocess(text, stemmer = "porter" , lemmatization = "wordnet"):
-
+def preprocess(text, stemmer = "porter" , lemmatization = "wordnet" , remove_stopwords = False):
     tokenised_text = nltk.word_tokenize(text)
-
-    ##Lematisation
+	
+	##Lematisation
     if lemmatization == 'wordnet':
     	tokenised_text = wordnet(tokenised_text)
 
@@ -13,6 +12,11 @@ def preprocess(text, stemmer = "porter" , lemmatization = "wordnet"):
     	tokenised_text = porter(tokenised_text)
     elif stemmer == 'lancaster' :
     	tokenised_text = lancaster(tokenised_text)
+
+    ##remove stopwords
+    if remove_stopwords:
+    	tokenised_text = nltk_remove_stopwords(tokenised_text)
+
 
     return tokenised_text
 
@@ -46,3 +50,8 @@ def wordnet(tokenised_text):
 		lemmas += [lmtzr.lemmatize(token)]
 
 	return lemmas
+
+
+def nltk_remove_stopwords(tokenised_text):
+	stopwords = nltk.corpus.stopwords.words('english')
+	return [w for w in tokenised_text if w.lower() not in stopwords]

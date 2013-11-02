@@ -6,19 +6,26 @@ I separated the components of the system in different files (preprocessing - ind
 called irsys which has the following usage:
 
 	usage: irsys [-h] [-j {index,query,session}] [-p PATH] [-q QUERY] [-e]
-             [-qid {6,7}]
+		[-qid {6,7}] [-s {porter,lancaster}] [-l {wordnet}] [-rs]
 
 	optional arguments:
-	  -h, --help            show this help message and exit
-	  -j {index,query,session}, --job {index,query,session}
-	                        Specify the job you need to run.
-	  -p PATH, --path PATH  Path of file or directory to index
-	  -q QUERY, --query QUERY
-	                        Query string to run (for single query mode)
-	  -e, --eval            Make res file and evaluate using terrier
-	  -qid {6,7}, --qid {6,7}
-	                        Pick one of the predefined queries to evaluate using
-	                        terrier
+		-h, --help            show this help message and exit
+		-j {index,query,session}, --job {index,query,session}
+		                    Specify the job you need to run.
+		-p PATH, --path PATH  Path of file or directory to index
+		-q QUERY, --query QUERY
+		                    Query string to run (for single query mode)
+		-e, --eval            Make res file and evaluate using terrier
+		-qid {6,7}, --qid {6,7}
+		                    Pick one of the predefined queries to evaluate using
+		                    terrier
+		-s {porter,lancaster}, --stem {porter,lancaster}
+		                    Pick one of the available stemmers for indexing
+		-l {wordnet}, --lem {wordnet}
+		                    Pick wither to use wordnet for lemmatization (maybe
+		                    add other options in the future)
+		-rs, --rs             Remove Stopwords , default is False
+
 
 
 By default the program will start in "session" mode where you can run multiple queries. Otherwise you need to specify a job (index, query , session) and then you will get prompted for the required inputs , or you can also add them as arguments like -p for the indexing path or -q for the single query string. More arguments are to be added later ex. for what stemmers to use , providing a list of stopwords etc.
@@ -51,13 +58,15 @@ to use wordnet we need the nltk_data folder which you can download by opening th
 	import nltk
 	nltk.download()
 
-It might take some time , and space , but you can just choos the wordnet package you dont have to download the whole thing.
+It might take some time , and space , but you can just choose the wordnet package you dont have to download the whole thing.
 
 Stop words
 --------------
  ( remove or index separately? )
 I was thinking we could index stop words in a separate file and then run some experiments on subgroups of them . For example we 
 could try taking only the N most frequent stopwords.
+
+I added stopword removal using the nltk list. I also found two lists of stopwords , one small and one very large. We could use the large to experiment with the frequencies.
 
 Granularity:
 -------------

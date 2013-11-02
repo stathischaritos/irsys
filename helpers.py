@@ -15,6 +15,7 @@ def load_index(dir = "/home/stathis/Projects/UVA_IR/index.pkl"):
             index['info'] = {}
             index['info']['stemmer'] = " "
             index['info']['lemmatization'] = " "
+            index['info']['remove_stopwords'] = False
                         
       return index 
 
@@ -32,7 +33,10 @@ def print_statistics(index , token = 'of'):
 
       unique_tokens = len(index['tokens'])
 
-      token_counts = index['tokens'][token]['total_counts']
+      token_counts = 0
+
+      if token in index['tokens']:
+            token_counts = index['tokens'][token]['total_counts']
 
       print "Total Number of Tokens : "  , total_tokens
       print "Number of Unique Tokens : "  ,  unique_tokens
@@ -66,27 +70,29 @@ def evaluate(query,qid,model='intersection'):
       return evaluation
       
 
-def index(dir_or_file , stemmer = 'lancaster' , lemmatization = "wordnet"):
+def index(dir_or_file , stemmer = 'lancaster' , lemmatization = "wordnet" , remove_stopwords = False):
       index = load_index()
 
-      if ( (index['info']['stemmer'] != stemmer ) or (index['info']['lemmatisation'] != lemmatization) ) :
+      if ( (index['info']['stemmer'] != stemmer ) or (index['info']['lemmatization'] != lemmatization) or (index['info']['remove_stopwords'] != remove_stopwords)  ) :
             index = {}
             index['indexed_docs'] = {}
             index['tokens'] = {}
             index['info'] = {}
-            index['info']['stemmer'] = " "
-            index['info']['lemmatization'] = " "
+            index['info']['stemmer'] = stemmer
+            index['info']['lemmatization'] = lemmatization
+            index['info']['remove_stopwords'] = remove_stopwords
       
       print "Settings :"
       print "Lemmatization :" + lemmatization
       print "Stemmer:" + stemmer
+      print "Remove Stopwords :" + str(remove_stopwords)
 
       if os.path.isfile(dir_or_file):
             print "Indexing Document '" + dir_or_file + "' ..."
-            index_document(dir_or_file,index , stemmer , lemmatization)
+            index_document(dir_or_file,index , stemmer , lemmatization ,remove_stopwords)
       elif os.path.isdir(dir_or_file):
             print "Indexing Directory '" + dir_or_file + "' ..."
-            index_directory(dir_or_file, index , stemmer , lemmatization)
+            index_directory(dir_or_file, index , stemmer , lemmatization ,remove_stopwords)
 
       save_index(index)
       print "Done!"
