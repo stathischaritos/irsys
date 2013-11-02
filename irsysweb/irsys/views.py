@@ -9,4 +9,4 @@ from helpers import *
 def index(request):
 
 	string = evaluate("sustainable ecosystems",6)
-	return HttpResponse("<pre>" + string + "</pre>")
+	return HttpResponse("<pre>" + str(string) + "</pre>")

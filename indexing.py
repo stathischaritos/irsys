@@ -2,21 +2,8 @@ from progressbar import ProgressBar
 from preprocessing import *
 import os
 
-def index(dir_or_file):
-      index = load_index()
 
-      if os.path.isfile(dir_or_file):
-            print "Indexing Document '" + dir_or_file + "' ..."
-            index_document(dir_or_file,index)
-      elif os.path.isdir(dir_or_file):
-            print "Indexing Directory '" + dir_or_file + "' ..."
-            index_directory(dir_or_file, index)
-
-      save_index(index)
-      print "Done!"
-      return index
-      
-def index_directory(collection_directory , index):
+def index_directory(collection_directory , index ,  stemmer = 'porter' , lemmatization ="wordnet"):
       pbar = ProgressBar()
 
       if collection_directory[len(collection_directory)-1] != '/':
@@ -25,11 +12,11 @@ def index_directory(collection_directory , index):
       for root, dirs, files in os.walk(collection_directory):
           for file in pbar(files):
               if file.endswith(".txt"):
-                  index_document(collection_directory + file, index)
+                  index_document(collection_directory + file, index , stemmer , lemmatization)
 
 
       
-def index_document(file,index):
+def index_document(file,index , stemmer = 'porter' , lemmatization ="wordnet"):
       ## Open every file in the collection and read the text
       f = open(file,'r')
       raw_text = f.read()
@@ -38,7 +25,7 @@ def index_document(file,index):
       file = file[len(file)-1]
       ############## Preprocessing Steps here ##########################
       ## Result should be a list of tokens
-      tokenized_text = preprocess(raw_text)
+      tokenized_text = preprocess(raw_text , stemmer , lemmatization)
       ##################################################################
 
       ############## Indexing Steps here ###############################

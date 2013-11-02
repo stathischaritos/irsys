@@ -43,7 +43,16 @@ Word Clustering - Stemming - Lemmatization
 -	Lancaster Stemmer 
 -	Other Stemmers
 -	WordNet
-	
+
+I made three new functions in the preprocessing component that do Porter Stemming - Lancaster and Wordnet Lemmatization (all from nltk) of the tokenised text and so  now we can run all these processes but we need to remove the old index if it uses a different stemmer combination. I should add some index info in the index dict so that its done automatically (it should get deleted if the new stemming is different than the old , also the queries need to be preprocessed the same way as the index.)
+
+to use wordnet we need the nltk_data folder which you can download by opening the python session and doing :
+
+	import nltk
+	nltk.download()
+
+It might take some time , and space , but you can just choos the wordnet package you dont have to download the whole thing.
+
 Stop words
 --------------
  ( remove or index separately? )
@@ -138,6 +147,8 @@ I made a simple django page to demonstrate the system using only python code.
 to start the django server go inside the irsysweb directory and run:
 
 	python manage.py runserver
+
+And then go to http://127.0.0.1:8000/irsys/
 
 
 Dependencies:
