@@ -157,7 +157,7 @@ to start the django server go inside the irsysweb directory and run:
 
 	python manage.py runserver
 
-And then go to http://127.0.0.1:8000/irsys/
+And then go to http://127.0.0.1:8000/
 
 
 Dependencies:

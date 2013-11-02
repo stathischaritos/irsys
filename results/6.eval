@@ -4,34 +4,34 @@ Retrieved          = 262
 Relevant           = 74
 Relevant retrieved = 74
 ____________________________________
-Average Precision: 0.4662
-R Precision      : 0.4459
+Average Precision: 0.5863
+R Precision      : 0.6351
 ____________________________________
 Precision at   1 : 0.0000
-Precision at   2 : 0.0000
+Precision at   2 : 0.5000
 Precision at   3 : 0.3333
 Precision at   4 : 0.5000
-Precision at   5 : 0.4000
-Precision at   10 : 0.6000
-Precision at   15 : 0.7333
-Precision at   20 : 0.7500
-Precision at   30 : 0.6667
-Precision at   50 : 0.5400
-Precision at   100 : 0.3900
-Precision at   200 : 0.3100
+Precision at   5 : 0.6000
+Precision at   10 : 0.7000
+Precision at   15 : 0.6000
+Precision at   20 : 0.6000
+Precision at   30 : 0.6333
+Precision at   50 : 0.6400
+Precision at   100 : 0.5900
+Precision at   200 : 0.3400
 Precision at   500 : 0.1480
 Precision at   1000 : 0.0740
 ____________________________________
-Precision at   0%: 0.8333
-Precision at   10%: 1.3590
-Precision at   20%: 0.7500
-Precision at   30%: 1.3622
-Precision at   40%: 1.0251
-Precision at   50%: 0.4253
-Precision at   60%: 0.7165
-Precision at   70%: 0.6840
-Precision at   80%: 0.3226
-Precision at   90%: 0.6054
-Precision at   100%: 0.2824
+Precision at   0%: 1.0000
+Precision at   10%: 0.7273
+Precision at   20%: 1.3084
+Precision at   30%: 1.3175
+Precision at   40%: 1.2841
+Precision at   50%: 0.6727
+Precision at   60%: 1.3284
+Precision at   70%: 0.6341
+Precision at   80%: 0.4762
+Precision at   90%: 0.3829
+Precision at   100%: 0.2868
 ____________________________________
-Average Precision: 0.4662
+Average Precision: 0.5863
