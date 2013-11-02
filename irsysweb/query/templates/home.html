@@ -57,14 +57,14 @@
               </ul>
             </li>
            --></ul>
-          <form class="navbar-form navbar-right">
+          <form class="navbar-form navbar-right" action="home" method="get">
             <div class="form-group">
-              <input type="text" class="form-control">
+              <input name="query" type="text" class="form-control">
             </div>
             <!-- <div class="form-group">
               <input type="password" placeholder="Password" class="form-control">
             </div> -->
-            <button type="submit" class="btn btn-success">Run Query</button>
+            <button type="submit" class="btn btn-success" >Run Query</button>
           </form>
         </div><!--/.navbar-collapse -->
       </div>
@@ -73,11 +73,55 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1>Welcome to IRSYS</h1>
-        <p>IRSYS is end to end information retrieval system made for the course IR at the University of Amsterdam by Stathis, Jay and Johan. Input and run a Query on the top right corner to see some results!</p>
+        {% if start %}
+            <h1> {{start.title}}</h1>
+            <p> {{start.welcome_text}}</p>
+        {% else %}
+        <div class="row"><h3>{{ results.title }}</h3></div>
+        <div class="row">
+          <div class="col-xs-6 col-md-4">
+            <table class="table">
+              <tr>
+              <td >Number of Queries</td>
+              <td >{{ results.results.NumberOfQueries}}</td>
+            </tr>
+            <tr>
+              <td >Retrieved</td>
+              <td >{{ results.results.Retrieved}}</td>
+            </tr>
+            <tr>
+              <td >Relevant</td>
+              <td >{{ results.results.Relevant}}</td>
+            </tr>
+            <tr>
+              <td >Relevant Retrieved</td>
+              <td >{{ results.results.RelevantRetrieved}}</td>
+            </tr>
+            <tr>
+              <td >Average Precision</td>
+              <td >{{ results.results.Average}}</td>
+            </tr>
+            <tr>
+              <td >R Precision</td>
+              <td >{{ results.results.R}}</td>
+            </tr>
+        </table>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-8">
+            <img src="{{ results.results.path }}" alt="Image Missing!" class="img-rounded"></div>
+        </div>
+        {% endif %}
+        
+        
         <!-- <p><a class="btn btn-primary btn-lg" href="http://getbootstrap.com/">Learn more &raquo;</a></p> -->
       </div>
     </div>
+
+    <div class="container">
+        <div class="row">
+          hello
+        </div>
+      </div>
 
     <div class="container">
       <!-- Example row of columns -->

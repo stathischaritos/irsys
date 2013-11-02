@@ -8,5 +8,5 @@ from helpers import *
 
 def index(request):
 
-	string = evaluate("sustainable ecosystems",6)
-	return HttpResponse("<pre>" + str(string) + "</pre>")
+	results = evaluate("sustainable ecosystems",6)
+	return HttpResponse("<pre>" + str(results) + "</pre>")

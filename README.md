@@ -1,5 +1,12 @@
 IRSYS (IR SYSTEM)
 =================
+
+*****important
+---------------
+i ve set hard paths in the project for django to work so you need to change them to run on your pc. Just search the whole project for 
+"/home/stathis/Projects/UVA_IR/"" and replace it to your path.
+
+
 This is an end to end IR system written in Python , as part of a lab assignment in the Course of IR at UvA. 
 
 I separated the components of the system in different files (preprocessing - indexing  - query models) and i made a main executable script 
@@ -159,6 +166,7 @@ to start the django server go inside the irsysweb directory and run:
 
 And then go to http://127.0.0.1:8000/
 
+Added query functionality and charts using matplotlib
 
 Dependencies:
 ===============

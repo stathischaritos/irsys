@@ -2,6 +2,8 @@ import pickle
 from indexing import *
 from query import *
 from subprocess import call
+from pylab import *
+
 
 def load_index(dir = "/home/stathis/Projects/UVA_IR/index.pkl"):
       if os.path.exists(dir):
@@ -67,7 +69,10 @@ def evaluate(query,qid,model='intersection'):
       f = open("/home/stathis/Projects/UVA_IR/results/"+ str(qid) +".eval",'r')
       evaluation= f.read()
       f.close()
-      return evaluation
+
+      return chart_results(str(qid))
+      
+     ## return evaluation
       
 
 def index(dir_or_file , stemmer = 'lancaster' , lemmatization = "wordnet" , remove_stopwords = False):
@@ -98,3 +103,61 @@ def index(dir_or_file , stemmer = 'lancaster' , lemmatization = "wordnet" , remo
       print "Done!"
       return index
       
+
+def chart_results(qid):
+      results = {}
+
+      precx = []
+      precy = []
+
+      pprecx = []
+      pprecy = []
+
+      with open("/home/stathis/Projects/UVA_IR/results/"+ str(qid) +".eval",'r') as infile:
+            i = 0
+            for row in infile:
+                  line = nltk.word_tokenize(row) 
+                  if len(line) == 3 :
+                        results[line[0]] = line[2];
+                  elif len(line) == 5 :
+                        if line[0] == 'Number':
+                              results['NumberOfQueries'] = line[4];
+                        else:
+                              # results["P" + line[2]] = line[4];
+                              precx += [line[2]]
+                              precy += [line[4]]
+                  elif len(line) == 6 :
+                        # results["PP" + line[2]] = line[5];
+                        pprecx += [line[2]] 
+                        pprecy += [line[5]]
+
+                  elif len(line) == 4 :
+                        if line[0] == 'Relevant':
+                              results['RelevantRetrieved'] = line[3];
+                        else:
+                              results[line[0]] = line[3]; 
+
+      rcParams['figure.figsize'] = 7, 3
+
+      # Make an example plot with two subplots...
+      fig = figure()
+      ax1 = fig.add_subplot(1,2,1)
+      ax1.plot(precx,precy ,color="blue", linewidth=2.5, linestyle="-" ,label="Precision at")
+      ax1.legend(loc='upper right')
+      ax2 = fig.add_subplot(1,2,2)
+      ax2.plot(pprecx,pprecy ,color="blue", linewidth=2.5, linestyle="-" ,label="Precision at %")
+      ax2.legend(loc='upper right')
+      fig.savefig("/home/stathis/Projects/UVA_IR/results/"+str(qid)+'.png' ,transparent=True)
+      fig.savefig("/home/stathis/Projects/UVA_IR/irsysweb/query/static/"+str(qid)+'.png' ,transparent=True)
+      results["path"] ="/static/"+str(qid)+'.png'
+      return results
+      # subplot(1,2,1)
+      # plot(precx,precy ,color="blue", linewidth=2.5, linestyle="-" ,label="Precision at")
+      # legend(loc='upper right')
+      # subplot(1,2,2)
+      # plot(pprecx,pprecy ,color="blue", linewidth=2.5, linestyle="-" ,label="Precision at %")
+      # legend(loc='upper right')
+      # show()
+
+
+     
