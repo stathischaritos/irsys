@@ -25,8 +25,12 @@ def home(request):
 		welcome_text = "IRSYS is end to end information retrieval system made for the course IR at the University of Amsterdam by Stathis, Jay and Johan. Input and run a Query on the top right corner to see some results!"
 		d = {"start" : {"title" : title , "welcome_text" : welcome_text }}
 	elif option == "predefined":
+		predefined_queries = {
+                        '6' : "sustainable ecosystems",
+                        '7' : 'air guitar textile sensors'
+                     }
 		results = chart_results(qid)
-		title = "Results for Predefined Query '" + "sustainable ecosystems" +"' :"
+		title = "Results for Predefined Query '" + predefined_queries[str(qid)] +"' :"
 		d = {"results": {"title": title , "results" : results}}
 	elif option=="query":
 		index = load_index()

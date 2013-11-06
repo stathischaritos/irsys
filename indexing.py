@@ -5,18 +5,18 @@ import os
 
 def index_directory(collection_directory , index ,  stemmer = 'porter' , lemmatization ="wordnet" , remove_stopwords = False):
       pbar = ProgressBar()
-
+      stopwords = load_stopwords('nltk' ,lemmatization , stemmer)
       if collection_directory[len(collection_directory)-1] != '/':
             collection_directory += '/'
 
       for root, dirs, files in os.walk(collection_directory):
           for file in pbar(files):
               if file.endswith(".txt"):
-                  index_document(collection_directory + file, index , stemmer , lemmatization ,remove_stopwords)
+                  index_document(collection_directory + file, index , stemmer , lemmatization ,remove_stopwords , stopwords)
 
 
       
-def index_document(file,index , stemmer = 'porter' , lemmatization ="wordnet" , remove_stopwords = False):
+def index_document(file,index , stemmer = 'porter' , lemmatization ="wordnet" , remove_stopwords = False , stopwords=[]):
       ## Open every file in the collection and read the text
 
       f = open(file,'r')
@@ -26,7 +26,7 @@ def index_document(file,index , stemmer = 'porter' , lemmatization ="wordnet" , 
       file = file[len(file)-1]
       ############## Preprocessing Steps here ##########################
       ## Result should be a list of tokens
-      tokenized_text = preprocess(raw_text , stemmer , lemmatization , remove_stopwords)
+      tokenized_text = preprocess(raw_text , stemmer , lemmatization , remove_stopwords , stopwords)
       ##################################################################
 
       ############## Indexing Steps here ###############################

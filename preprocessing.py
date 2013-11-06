@@ -1,23 +1,11 @@
 import nltk
 
-def preprocess(text, stemmer = "porter" , lemmatization = "wordnet" , remove_stopwords = False):
+def preprocess(text, stemmer = "porter" , lemmatization = "wordnet" , remove_stopwords = False , stopwords=[]):
     tokenised_text = nltk.word_tokenize(text)
-	
-	##Lematisation
-    if lemmatization == 'wordnet':
-    	tokenised_text = wordnet(tokenised_text)
-
-    ## Stemming
-    if stemmer == 'porter':
-    	tokenised_text = porter(tokenised_text)
-    elif stemmer == 'lancaster' :
-    	tokenised_text = lancaster(tokenised_text)
-
+    tokenised_text = normalize(tokenised_text,lemmatization,stemmer)
     ##remove stopwords
     if remove_stopwords:
-    	tokenised_text = nltk_remove_stopwords(tokenised_text)
-
-
+    	tokenised_text = f_remove_stopwods(tokenised_text ,stopwords)
     return tokenised_text
 
 
@@ -51,7 +39,36 @@ def wordnet(tokenised_text):
 
 	return lemmas
 
+def load_stopwords(choice = 'nltk' ,lemmatization = 'wordnet' , stemmer = 'porter'):
+	if choice == 'nltk':
+		stopwords = nltk.corpus.stopwords.words('english')
+	else:
+		if choice=="small":
+			file_string = "ensmall.stopwords"
+		else :
+			file_string = "en.stopwords"
+		f = open(file,'r')
+		raw_text = f.read()
+		f.close()
+		stopwords = word_tokenize(raw_text)
 
-def nltk_remove_stopwords(tokenised_text):
-	stopwords = nltk.corpus.stopwords.words('english')
+	stopwords = normalize(stopwords,lemmatization,stemmer)
+	return stopwords
+
+
+def f_remove_stopwods(tokenised_text , stopwords):
 	return [w for w in tokenised_text if w.lower() not in stopwords]
+
+
+
+def normalize(tokenised_text , lemmatization = 'wordnet' , stemmer = 'porter'):
+	##Lematisation
+	if lemmatization == 'wordnet':
+		tokenised_text = wordnet(tokenised_text)
+	else:
+		## Stemming
+		if stemmer == 'porter':
+			tokenised_text = porter(tokenised_text)
+		elif stemmer == 'lancaster' :
+			tokenised_text = lancaster(tokenised_text)
+	return tokenised_text
