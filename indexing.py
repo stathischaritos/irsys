@@ -5,7 +5,7 @@ import os
 
 def index_directory(collection_directory , index ,  stemmer = 'porter' , lemmatization ="wordnet" , remove_stopwords = False):
       pbar = ProgressBar()
-      stopwords = load_stopwords('nltk' ,lemmatization , stemmer)
+      stopwords = load_stopwords('big' ,lemmatization , stemmer)
       if collection_directory[len(collection_directory)-1] != '/':
             collection_directory += '/'
 

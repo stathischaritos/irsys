@@ -7,10 +7,29 @@ def run_query(query_string , index , model='intersection'):
             result =[]
             if model =='intersection':
                   result = intersection(query_string , index)
+            elif model == 'bm25':
+            	result = bm25(query_string,index)
+            elif model == 'tfidf':
+           		result = tfidf(query_string,index)
             return result
       
 
 
+def bm25(query_string,index):
+	#magic
+
+	result = "nothing done yet"
+
+	#result = sorted(result, key=lambda tup: tup[1])[::-1]
+	return result
+
+def tfidf(query_string,index):
+	#magic
+
+	result = "tfidf nothing done yet"
+
+	#result = sorted(result, key=lambda tup: tup[1])[::-1]
+	return result
 
 def intersection(query_string,index):
 	

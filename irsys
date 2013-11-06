@@ -35,6 +35,8 @@ elif args.job == "index":
       lem = "none"
       if args.stem :
             stemmer = args.stem
+      else:
+            stemmer = 'none'
       if args.lem :
             lem = args.lem
 
@@ -47,9 +49,9 @@ elif args.job == "index":
 elif args.job == "query":
       if not args.query:
             args.query = raw_input("Please enter a Query to perform :") 
-
+      model = 'tfidf'
       index = load_index()
-      print run_query(args.query , index)
+      print run_query(args.query , index , model)
       
 else:
       index = load_index()

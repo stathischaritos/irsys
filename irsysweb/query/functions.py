@@ -310,6 +310,8 @@ def chart_results(qid):
 
       rcParams['figure.figsize'] = 7, 3
 
+      precx = precx[0:12]
+      precy = precy[0:12]
       # Make an example plot with two subplots...
       fig = figure()
       ax1 = fig.add_subplot(1,2,1)

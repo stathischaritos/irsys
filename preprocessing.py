@@ -47,11 +47,11 @@ def load_stopwords(choice = 'nltk' ,lemmatization = 'wordnet' , stemmer = 'porte
 			file_string = "ensmall.stopwords"
 		else :
 			file_string = "en.stopwords"
-		f = open(file,'r')
+		f = open(file_string,'r')
 		raw_text = f.read()
 		f.close()
-		stopwords = word_tokenize(raw_text)
-
+		stopwords = nltk.word_tokenize(raw_text)
+	print lemmatization , stemmer
 	stopwords = normalize(stopwords,lemmatization,stemmer)
 	return stopwords
 
