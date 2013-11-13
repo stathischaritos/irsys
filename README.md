@@ -119,6 +119,9 @@ The index at this point has the following structure:
 
 
 There seem to be some invalid characters , i think it has to do with the encoding , fix it later.
+Ok so zervos told me they only keep alphanumeric characters and that how they get rid of duplicates like "word" and "word." etc.
+I think we can do the same and this should bring our stats close to the ones Wouter has. So we just keep characters and numbers.
+To do this we can make a filter() function that runs before word_tokenize() and removes all unnecessary characters.
 
 IR: 
 ==============
