@@ -1,12 +1,16 @@
 import nltk
+import re
 
 def preprocess(text, stemmer = "porter" , lemmatization = "wordnet" , remove_stopwords = False , stopwords=[]):
-    tokenised_text = nltk.word_tokenize(text)
-    tokenised_text = normalize(tokenised_text,lemmatization,stemmer)
-    ##remove stopwords
-    if remove_stopwords:
-    	tokenised_text = f_remove_stopwods(tokenised_text ,stopwords)
-    return tokenised_text
+	
+	text = re.sub(r'\W+', ' ', text)
+	text = text.lower()
+	tokenised_text = nltk.word_tokenize(text)
+	tokenised_text = normalize(tokenised_text,lemmatization,stemmer)
+	##remove stopwords
+	if remove_stopwords:
+		tokenised_text = f_remove_stopwods(tokenised_text ,stopwords)
+	return tokenised_text
 
 
 def lancaster(tokenised_text):
