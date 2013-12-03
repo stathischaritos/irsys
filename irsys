@@ -13,6 +13,7 @@ parser.add_argument("-qid", "--qid" ,type = int,choices=[6, 7], help="Pick one o
 parser.add_argument("-s", "--stem" ,type = str,choices=['porter', 'lancaster'], help="Pick one of the available stemmers for indexing")
 parser.add_argument("-l", "--lem" ,type = str,choices=['wordnet'], help="Pick wither to use wordnet for lemmatization (maybe add other options in the future)")
 parser.add_argument("-rs", "--rs" ,action='store_true', help="Remove Stopwords , default is False")
+parser.add_argument("-m", "--model" ,type=str,choices=['tfidf', 'bm25' , 'boolean'], help="Choose Retrieval Model")
 args = parser.parse_args()
 
 ##Predefined Queries
@@ -22,9 +23,13 @@ predefined_queries = {
                      }
 
 if args.qid:
+      model = 'tfidf'
+      if args.model:
+            model = args.model
+      print model
       query = predefined_queries[str(args.qid)];
       print "Evaluating Query : " + query
-      print evaluate(query,args.qid)
+      print evaluate(query,args.qid,model)
       
 elif args.job == "index":
 
@@ -50,6 +55,8 @@ elif args.job == "query":
       if not args.query:
             args.query = raw_input("Please enter a Query to perform :") 
       model = 'tfidf'
+      if args.model:
+            model = args.model
       index = load_index()
       print run_query(args.query , index , model)
       

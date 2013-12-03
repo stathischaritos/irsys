@@ -68,17 +68,16 @@ def evaluate(query,qid,model='intersection'):
       call(["/home/stathis/Projects/UVA_IR/terrier/bin/trec_terrier.sh", "-e /home/stathis/Projects/UVA_IR/results/"+ str(qid) +".res"])
 
       f = open("/home/stathis/Projects/UVA_IR/results/"+ str(qid) +".eval",'r')
-      evaluation= f.read()
+      evaluation = f.read()
       f.close()
 
-      return chart_results(str(qid))
+      #return chart_results(str(qid))
       
-     ## return evaluation
+      return evaluation
       
 
-def index(dir_or_file , stemmer = 'lancaster' , lemmatization = "wordnet" , remove_stopwords = False):
+def index(dir_or_file , stemmer = 'lancaster' , lemmatization = "wordnet" , remove_stopwords = False , stopwords = 'nltk'):
       index = load_index()
-
       if ( (index['info']['stemmer'] != stemmer ) or (index['info']['lemmatization'] != lemmatization) or (index['info']['remove_stopwords'] != remove_stopwords)  ) :
             index = {}
             index['indexed_docs'] = {}
@@ -87,7 +86,11 @@ def index(dir_or_file , stemmer = 'lancaster' , lemmatization = "wordnet" , remo
             index['info']['stemmer'] = stemmer
             index['info']['lemmatization'] = lemmatization
             index['info']['remove_stopwords'] = remove_stopwords
+            
       
+      if 'stopwords' not in index['info']:
+            index['info']['stopwords'] = load_stopwords(stopwords ,lemmatization , stemmer)
+
       print "Settings :"
       print "Lemmatization :" + lemmatization
       print "Stemmer:" + stemmer
@@ -95,10 +98,10 @@ def index(dir_or_file , stemmer = 'lancaster' , lemmatization = "wordnet" , remo
 
       if os.path.isfile(dir_or_file):
             print "Indexing Document '" + dir_or_file + "' ..."
-            index_document(dir_or_file,index , stemmer , lemmatization ,remove_stopwords)
+            index_document(dir_or_file,index , stemmer , lemmatization ,remove_stopwords , index['info']['stopwords'])
       elif os.path.isdir(dir_or_file):
             print "Indexing Directory '" + dir_or_file + "' ..."
-            index_directory(dir_or_file, index , stemmer , lemmatization ,remove_stopwords)
+            index_directory(dir_or_file, index , stemmer , lemmatization ,remove_stopwords , index['info']['stopwords'])
 
       save_index(index)
       print "Done!"
