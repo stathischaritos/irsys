@@ -60,7 +60,7 @@ def evaluate(query,qid,model='intersection'):
       i = 0
       for doc in result:
             i += 1
-            string += str(qid) + " Q0 " + doc[0] +" "+ str(i) + " " + str(doc[1]) + " " + str(runID) + "\n"
+            string += str(qid) + " Q0 " + doc[0] +" "+ str(i) + " " + str(round(doc[1],2))+ " " + str(runID) + "\n"
       f.write(string)
       f.close() 
 

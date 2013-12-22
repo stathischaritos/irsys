@@ -15,23 +15,30 @@ def run_query(query_string , index , model='intersection'):
       
 
 
-def tfidf(query_string,index):
+def tfidf(query_string,index , tf_choice = 1):
 	print 'Model tfidf'
 
 	## Preprocess the Query String using the same steps as the index. 
-	N = len(index['indexed_docs'])
 	query = preprocess(query_string,index['info']['stemmer'],index['info']['lemmatization'] , index['info']['remove_stopwords'] , index['info']['stopwords'])
 	result = []
 	newd = {}
     
+    #Clean query from unseen words
+	query_clean = []
+	for word in query:
+	    if word in index['tokens']:
+	    	query_clean += [word]
+
+	query = query_clean
+
     ## Run tf-idf
 	for word in query:
-	    max_freq = max(index['tokens'][word]['counts'].iteritems(), key=operator.itemgetter(1))[1]
+	    ##max_freq = max(index['tokens'][word]['counts'].iteritems(), key=operator.itemgetter(1))[1]
 	    df = index['tokens'][word]['df']
-	    idf = math.log(float( 1+ N ) / float(1 + df))
+	    idf = math.log(float(len(index['indexed_docs']) ) / float(df))
 	    for tf_doc_id in index['tokens'][word]['counts'].keys() :	
-	    	freq = index['tokens'][word]['counts'] [tf_doc_id]
-	    	tf = float(freq) / max_freq #float(tel['length'])
+	    	freq = index['tokens'][word]['counts'][tf_doc_id]
+	    	tf = 1 + math.log(float(freq) )
 	    	tfidf = float(tf) * float(idf)
 	    	if tf_doc_id not in newd :
 	    		newd[tf_doc_id] = tfidf
@@ -56,7 +63,18 @@ def bm25(query_string,index):
 	result = []
 	a = []
 
+	
+
 	query = preprocess(query_string,index['info']['stemmer'],index['info']['lemmatization'] , index['info']['remove_stopwords'] , index['info']['stopwords'])
+	
+	#Clean query from unseen words
+	query_clean = []
+	for word in query:
+	    if word in index['tokens']:
+	    	query_clean += [word]
+
+	query = query_clean
+
 	for word in query:
 		df = index['tokens'][word]['df']
 		sum_of_idf += math.log(float( 1+ N ) / float(1 + df))
@@ -74,10 +92,10 @@ def bm25(query_string,index):
 	#Cumpute and store the score
 	for word in query:
 	    #print max(index['tokens'][word]['counts'].iteritems(), key=operator.itemgetter(1))
-	    max_freq = max(index['tokens'][word]['counts'].iteritems(), key=operator.itemgetter(1))[1]
+	    # = max(index['tokens'][word]['counts'].iteritems(), key=operator.itemgetter(1))[1]
 	    for tf_doc_id in index['tokens'][word]['counts'].keys() :
 	    	freq = index['tokens'][word]['counts'] [tf_doc_id]
-	    	tf = float(freq) / float(max_freq) #float(tel['length'])
+	    	tf = tf = 1 + math.log(float(freq)) #float(tel['length'])
 	    	ld = float(index['indexed_docs'][tf_doc_id]['length'])
 	    	score = ((k1+1)*tf)/(k1*((1-b)+b*(ld/lave))+tf) * sum_of_idf
 	    	if tf_doc_id not in newd :
@@ -117,6 +135,10 @@ def intersection(query_string,index):
 	    		b = index['tokens'][word]['counts'].keys()
 	    		a = list(set(a) & set(b))
 
+	# for x in a:   		
+	# 	doc = []
+	# 	for word in query:
+	# 		doc +=[word , index['tokens'][word]['counts'][x] ]
 	result = []
 	for doc in index['indexed_docs']:
 		if doc in a:
@@ -127,4 +149,3 @@ def intersection(query_string,index):
 	## Sort Results by score
 	result = sorted(result, key=lambda tup: tup[1])[::-1]
 	return result
-

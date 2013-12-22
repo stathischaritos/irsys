@@ -17,7 +17,6 @@ def index_directory(collection_directory , index ,  stemmer = 'porter' , lemmati
       
 def index_document(file,index , stemmer = 'porter' , lemmatization ="wordnet" , remove_stopwords = False , stopwords=[]):
       ## Open every file in the collection and read the text
-
       f = open(file,'r')
       raw_text = f.read()
       f.close()
@@ -38,6 +37,11 @@ def index_document(file,index , stemmer = 'porter' , lemmatization ="wordnet" , 
             else:
                   document[term] = 1
 
+      max_freq = 1
+      if len(document)>0:
+            max_freq = max(document, key=document.get)
+            max_freq = document[max_freq]
+
       ## Save document id and length
       doc_id = file[0:(len(file)-4)]
 
@@ -46,6 +50,7 @@ def index_document(file,index , stemmer = 'porter' , lemmatization ="wordnet" , 
             indexed_before  = False
             index['indexed_docs'][doc_id] = {}
             index['indexed_docs'][doc_id]["length"] = len(tokenized_text)
+            index['indexed_docs'][doc_id]["max_freq"] = max_freq
       else : 
             indexed_before = True
 

@@ -71,7 +71,9 @@ I added stopword removal using the nltk list. I also found two lists of stopword
 
 Granularity:
 -------------
-Right now we index every document as a whole , and this is fine for small documents , buts for langer documents like books , it is best to treat chapters or pages separately.
+Right now we index every document as a whole , and this is fine for small documents , buts for langer documents like books , it is best to treat chapters or pages separately. We might want to implement something for big documents in our collection. Document size is also taken
+into consideration in the tf calculation , but it is a bit different cause granularity would recognise parts of the document that have a high tf
+from the whole document having a normal tf.
 
 
 Indexing:
